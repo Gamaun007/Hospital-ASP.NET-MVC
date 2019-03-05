@@ -1,0 +1,42 @@
+﻿@model Hospital.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+<h4>@ViewBag.Message</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<section class="register-section">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.FirstName)
+    @Html.EditorFor(model => model.FirstName)
+    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.SecondName)
+    @Html.EditorFor(model => model.SecondName)
+    @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.Email)
+    @Html.EditorFor(model => model.Email)
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.Password)
+    @Html.EditorFor(model => model.Password)
+    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.ConfirmPassword)
+    @Html.EditorFor(model => model.ConfirmPassword)
+    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(model => model.Address)
+    @Html.EditorFor(model => model.Address)
+    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+    <div class="submit-button">
+        <input type="submit" value="Register" class="btn btn-default" />
+    </div>
+
+</section>
+}
+
