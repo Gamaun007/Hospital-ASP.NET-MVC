@@ -39,12 +39,12 @@ namespace Hospital.DataAccessLayer.DataBaseContext
                 .WithRequiredPrincipal(m => m.Patient)
                 .WillCascadeOnDelete(false);
             
-            // User profile CAN have an Patient account that has this profile
+            // User profile CAN have an Patient account that has this profile,cannot save patient without profile
             modelBuilder.Entity<UserProfile>()
                 .HasOptional(up => up.Patient)
                 .WithRequired(p => p.Profile);
 
-            // User profile CAN have an Doctor account that has this profile
+            // User profile CAN have an Doctor account that has this profile, cannot save doctor without profile
             modelBuilder.Entity<UserProfile>()
                .HasOptional(up => up.Doctor)
                .WithRequired(p => p.Profile);

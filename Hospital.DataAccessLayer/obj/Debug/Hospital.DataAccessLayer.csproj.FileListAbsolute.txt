@@ -15,3 +15,5 @@ C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB.resources
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csproj.GenerateResource.Cache
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB1.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB2.resources

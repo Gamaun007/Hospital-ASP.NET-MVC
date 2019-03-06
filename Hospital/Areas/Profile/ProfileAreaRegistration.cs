@@ -17,7 +17,7 @@ namespace Hospital.Areas.Profile
             context.MapRoute(
                 "Profile_default",
                 "Profile/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new {contoller = "Information", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

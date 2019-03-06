@@ -40,7 +40,6 @@ namespace Hospital.DataAccessLayer.Repositories
         public void Create(UserProfile profile)
         {
             DbContext.Profiles.Add(profile);
-            DbContext.SaveChanges();
         }
     }
 }

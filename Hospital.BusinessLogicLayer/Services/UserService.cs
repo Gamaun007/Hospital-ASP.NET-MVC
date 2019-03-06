@@ -19,6 +19,14 @@ namespace Hospital.BusinessLogicLayer.Services
     {
         public IUnitOfRepositories RepoUnit { get; set; }
 
+        public ICollection<string> GetDoctorSpecializations
+        {
+            get
+            {
+                return  Enum.GetValues(typeof(Specialization)).Cast<Specialization>().Select(s => s.ToString()).ToList();
+            }
+        }
+
         public UserService(IUnitOfRepositories uor)
         {
             RepoUnit = uor;
@@ -39,20 +47,25 @@ namespace Hospital.BusinessLogicLayer.Services
 
             return claim;
         }
+        public string GetUserPhoneNumber(string userId)
+        {
+           var number = RepoUnit.UserManager.GetPhoneNumber(userId);
+           return number;
+        }
         public ProfileDTO GetUserProfileInfo(string userId)
         {
             ProfileDTO result = null;
             UserProfile profileFromDB = RepoUnit.ProfileRepository.Get(userId);
             if (profileFromDB != null)
-            {
-                
-                var doc = MapperDTO.DoctorToDoctorDTO.Map<Doctor, DoctorDTO>(profileFromDB.Doctor);
-                var pat = MapperDTO.PatientToPatientDTO.Map<Patient, PatientDTO>(profileFromDB.Patient);
-                var user = MapperDTO.ApplicationUserToUserDTO.Map<ApplicationUser, UserDTO>(profileFromDB.ApplicationUser);
+            {               
+                //var doc = MapperDTO.DoctorToDoctorDTO.Map<Doctor, DoctorDTO>(profileFromDB.Doctor);
+                //var pat = MapperDTO.PatientToPatientDTO.Map<Patient, PatientDTO>(profileFromDB.Patient);
+                //var user = MapperDTO.ApplicationUserToUserDTO.Map<ApplicationUser, UserDTO>(profileFromDB.ApplicationUser);
                 MapperDTO mapRepo = new MapperDTO(RepoUnit);
-                result = mapRepo.UserProfileToProfileDTO.Map<UserProfile, ProfileDTO>(profileFromDB);
+                return result = mapRepo.UserProfileToProfileDTO.Map<UserProfile, ProfileDTO>(profileFromDB);
             }
-            return result;
+            else
+            throw new ApplicationException("Profile not found");
         }
 
         public void Create(UserDTO user)
@@ -99,6 +112,26 @@ namespace Hospital.BusinessLogicLayer.Services
                     role = new ApplicationRole { Name = roleName.ToString() };
                     RepoUnit.RoleManager.Create(role);
                 }
+            }
+        }
+
+        public void AddUserDoctor(string userId, DoctorDTO doctorDTO)
+        {
+           var profileFromDb = RepoUnit.ProfileRepository.Get(userId);
+            if (profileFromDb != null || profileFromDb.Doctor == null)
+            {
+                var res = MapperDTO.DoctorDTOToDoctor.Map<DoctorDTO, Doctor>(doctorDTO);
+                res.Profile = profileFromDb;
+                RepoUnit.DoctorRepository.Create(res);
+
+                if (!RepoUnit.RoleManager.RoleExists(Roles.Doctor.ToString()))
+                {
+                    var role = new ApplicationRole { Name = Roles.Doctor.ToString() };
+                    RepoUnit.RoleManager.Create(role);
+                }
+
+                RepoUnit.UserManager.AddToRole(userId, Roles.Doctor.ToString());
+                RepoUnit.SaveChanges();
             }
         }
     }

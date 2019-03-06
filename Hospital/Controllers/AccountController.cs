@@ -53,8 +53,9 @@ namespace Hospital.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
+                    return View();
                 }
-                return View();
+                return RedirectToAction("Login", "Account");
             }
             return View(registerModel);
         }
@@ -96,7 +97,7 @@ namespace Hospital.Controllers
                 {
                     IsPersistent = true
                 }, claim);
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("Index", "Home");
             }
             return View(model);
 

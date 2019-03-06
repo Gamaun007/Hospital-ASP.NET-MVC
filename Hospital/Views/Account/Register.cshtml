@@ -18,6 +18,10 @@
     @Html.EditorFor(model => model.SecondName)
     @Html.ValidationMessageFor(model => model.SecondName, "", new { @class = "text-danger" })
 
+    @Html.LabelFor(model => model.PhoneNumber)
+    @Html.EditorFor(model => model.PhoneNumber)
+    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
     @Html.LabelFor(model => model.Email)
     @Html.EditorFor(model => model.Email)
     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })

@@ -13,6 +13,8 @@ namespace Hospital.DataAccessLayer.Entities
 
         public int Id { set; get; }
         public bool IsConfirmed { set; get; }
+        public string PhoneNumber { set; get; }
+        public string AdditionalInformation { set; get; }
 
         [Required]
         public Specialization Specialization { get; set; }

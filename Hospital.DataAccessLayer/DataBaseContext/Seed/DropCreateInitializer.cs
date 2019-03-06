@@ -30,11 +30,17 @@ namespace Hospital.DataAccessLayer.DataBaseContext.Seed
             roleManager.Create(userRole);
 
 
-            ApplicationUser user1 = new ApplicationUser { UserName = "Jimmy", Email = "somemail@gmail.com" };
-            UserManager.Create(user1, "1234587");
-            UserManager.AddToRole(user1.Id, userRole.Name);
-            //profManager.CreateProfile(user1);
+            ApplicationUser user1 = new ApplicationUser { UserName ="rog@gmail.com",  Email = "rog@gmail.com", Address ="L-Svobody", Name = "Sergey Rog" , PhoneNumber = "+380953133494"};
 
+            var res = UserManager.Create(user1, "123456");
+            if (res.Succeeded)
+            {
+                UserManager.AddToRole(user1.Id, userRole.Name);
+            }
+            
+
+            UserProfile userProfile = new UserProfile { Id = user1.Id, ApplicationUser = user1 };
+            profManager.Create(userProfile);
             context.SaveChanges();
 
             base.Seed(context);

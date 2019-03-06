@@ -1,0 +1,35 @@
+﻿@using Hospital.Areas.Doctor.Models
+@model DoctorRegistrationModel
+@{
+    ViewBag.Title = "Create Doctor PAge";
+}
+
+<h2>You are in the creating page of "Doctor" role</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<section class="creating-doctor-section">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @ViewBag.PhonenumberInfo
+    @Html.LabelFor(m => m.PhoneNumber)
+    @Html.EditorFor(m => m.PhoneNumber)
+    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+
+    @Html.DropDownListFor(model => model.SelectedSpecialization, Model.Specializations, "Select your specialization")
+    @Html.ValidationMessageFor(x => x.SelectedSpecialization, "", new { @class = "text-danger" })
+
+    @Html.LabelFor(m => m.AdditionalInformation)
+    @Html.TextAreaFor(model => model.AdditionalInformation, 10, 17, "")
+    @Html.ValidationMessageFor(model => model.AdditionalInformation, "", new { @class = "text-danger" })
+
+    <div class="submit-button">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+
+</section>
+}
+
+

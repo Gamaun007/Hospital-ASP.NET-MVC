@@ -1,0 +1,64 @@
+﻿@using Hospital.Areas.Profile.Models
+@model ProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+
+<h2>Your profile information</h2>
+@{
+    if (Model.IsUserDoctor && !Model.IsDoctorConfirmed)
+    {
+        <h4>Your Doctor page is on watching by Administration, wait for the confirmation!</h4>
+    }
+    if (Model.IsUserPatient && !Model.IsPatientConfirmed)
+    {
+        <h4>Your Patient page is on watching by Administration, wait for the confirmation!</h4>
+    }
+
+}
+@Html.LabelFor(model => model.Email)
+@Model.Email
+
+@Html.LabelFor(model => model.Address)
+@Model.Address
+
+
+@Html.LabelFor(model => model.PhoneNumber)
+@Model.PhoneNumber
+
+@Html.LabelFor(model => model.Name)
+@Model.Name
+
+@Html.LabelFor(model => model.Roles)
+@{
+    var res = string.Join(",", Model.Roles);
+}
+@res;
+@*@foreach (var role in Model.Roles)
+    {
+        @Html.Label(role)
+    }*@
+
+@if (Model.IsUserDoctor)
+{
+    @Html.ActionLink("Patient Page", "Information", "Page")
+}
+else if (!Model.IsUserDoctor)
+{
+    @Html.ActionLink("Create an Doctor page", "Create", "Page")
+}
+
+@if (Model.IsUserPatient)
+{
+    @Html.ActionLink("Patient Page", "Information", "Page")
+}
+else if (!Model.IsUserPatient)
+{
+    @Html.ActionLink("Create an Patient page", "Create", "Page")
+}
+
+
+
+
+
+

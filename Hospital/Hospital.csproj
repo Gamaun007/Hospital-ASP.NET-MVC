@@ -195,6 +195,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Areas\Doctor\Controllers\PageController.cs" />
+    <Compile Include="Areas\Doctor\DoctorAreaRegistration.cs" />
+    <Compile Include="Areas\Doctor\Models\DoctorRegistrationModel.cs" />
     <Compile Include="Areas\Profile\Controllers\InformationController.cs" />
     <Compile Include="Areas\Profile\Models\ProfileViewModel.cs" />
     <Compile Include="Areas\Profile\ProfileAreaRegistration.cs" />
@@ -233,10 +236,14 @@
     <Content Include="Areas\Profile\Views\web.config" />
     <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Profile\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Profile\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Profile\Views\Information\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Doctor\Views\web.config" />
+    <Content Include="Areas\Doctor\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Doctor\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Doctor\Views\Page\Create.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

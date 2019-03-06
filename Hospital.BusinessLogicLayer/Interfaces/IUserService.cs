@@ -16,6 +16,9 @@ namespace Hospital.BusinessLogicLayer.Interfaces
         ClaimsIdentity Authenticate(UserDTO user);
         void SetInitialRoles(List<Roles> roles);
         ProfileDTO GetUserProfileInfo(string userId);
+        string GetUserPhoneNumber(string userId);
+        ICollection<string> GetDoctorSpecializations { get; }
+        void AddUserDoctor(string userId,DoctorDTO doctorDTO);
 
 
     }

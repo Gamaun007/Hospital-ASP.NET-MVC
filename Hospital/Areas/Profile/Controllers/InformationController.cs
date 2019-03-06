@@ -40,11 +40,18 @@ namespace Hospital.Areas.Profile.Controllers
         {
             
             var userId = User.Identity.GetUserId();
-            var profileDTO = UserService.GetUserProfileInfo(userId);
+            ProfileDTO profileDTO = null;
+            try
+            {
+               profileDTO = UserService.GetUserProfileInfo(userId);
+            }          
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return RedirectToAction("Index", "Home",new { area = AreaReference.UseRoot });
+            }
             var profileVM = MapperViewModel.ProfileDTOToProfileViewModel.Map<ProfileDTO, ProfileViewModel>(profileDTO);
-
-
-            return View();
+            return View(profileVM);
         }
     }
 }

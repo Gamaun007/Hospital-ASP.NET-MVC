@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Hospital.DataAccessLayer.Entities;
+using Hospital.DataAccessLayer.Enums;
 using Hospital.DataAccessLayer.Interfaces;
 using Hospital.DataAccessLayer.Repositories;
 using Microsoft.AspNet.Identity;
@@ -15,6 +16,7 @@ namespace Hospital.BusinessLogicLayer.DataTransferObjects.AutoMapper
     public class MapperDTO
     {      
         private static MapperConfiguration _userDTOToApplicationUser;
+        private static MapperConfiguration _DoctorDTOtoDoctor;
         private static MapperConfiguration _userProfileToProfileDTO;
         private static MapperConfiguration _applicationUserToUserDTO;
         private static MapperConfiguration _doctorToDoctorDTO;
@@ -26,7 +28,9 @@ namespace Hospital.BusinessLogicLayer.DataTransferObjects.AutoMapper
             ForMember(a => a.Id, opt => opt.UseDestinationValue())
             .ForMember( a => a.UserName, opt => opt.MapFrom(c => c.Email)));
 
-           
+            _DoctorDTOtoDoctor = new MapperConfiguration(cfg => cfg.CreateMap<DoctorDTO, Doctor>().
+             ForMember(d => d.Specialization, opt => opt.MapFrom(s => (Specialization)Enum.Parse(typeof(Specialization), s.Specialization, true)))
+             .ForMember(d => d.Id,opt => opt.UseDestinationValue()));
 
             _applicationUserToUserDTO = new MapperConfiguration(cfg => cfg.CreateMap<ApplicationUser, UserDTO>());
 
@@ -73,6 +77,13 @@ namespace Hospital.BusinessLogicLayer.DataTransferObjects.AutoMapper
             get
             {
                 return _applicationUserToUserDTO.CreateMapper();
+            }
+        }
+        public static IMapper DoctorDTOToDoctor
+        {
+            get
+            {
+                return _doctorToDoctorDTO.CreateMapper();
             }
         }
 

@@ -51,7 +51,7 @@ namespace Hospital.DataAccessLayer.Repositories
         public void Create(Doctor doctor)
         {
             DbContext.Doctors.Add(doctor);
-            DbContext.SaveChanges();
+            //DbContext.SaveChanges();
         }
     }
 }

@@ -6,6 +6,7 @@
         public int Id { get; set; }
         public bool IsDischarged { set; get; }
         public bool IsConfirmed { set; get; }
+        public string PhoneNumber { set; get; }
 
         public virtual UserProfile Profile { get; set; }
         public virtual MedicalCard MedicalCard { set; get; }
