@@ -195,9 +195,30 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\ConfirmationController.cs" />
+    <Compile Include="Areas\Administration\Controllers\ControlPanelController.cs" />
+    <Compile Include="Areas\Administration\Controllers\RelationshipController.cs" />
+    <Compile Include="Areas\Administration\Models\ConfirmationModel.cs" />
+    <Compile Include="Areas\Administration\Models\DoctorsPatientsSorting.cs" />
+    <Compile Include="Areas\Administration\Models\DoctorViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\OrderFlags.cs" />
+    <Compile Include="Areas\Administration\Models\PanelViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\PatientViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\RelationshipModel.cs" />
     <Compile Include="Areas\Doctor\Controllers\PageController.cs" />
+    <Compile Include="Areas\Doctor\Controllers\PatientCardController.cs" />
     <Compile Include="Areas\Doctor\DoctorAreaRegistration.cs" />
+    <Compile Include="Areas\Doctor\Models\DoctorPageInfo.cs" />
     <Compile Include="Areas\Doctor\Models\DoctorRegistrationModel.cs" />
+    <Compile Include="Areas\Doctor\Models\MedicalCardPageViewModel.cs" />
+    <Compile Include="Areas\Doctor\Models\PatientCardViewModel.cs" />
+    <Compile Include="Areas\Patient\Controllers\MedicalCardController.cs" />
+    <Compile Include="Areas\Patient\Controllers\PageController.cs" />
+    <Compile Include="Areas\Patient\Models\MedicalCardViewModel.cs" />
+    <Compile Include="Areas\Patient\Models\PatientPageInfo.cs" />
+    <Compile Include="Areas\Patient\Models\PatientRegistrationModel.cs" />
+    <Compile Include="Areas\Patient\PatientAreaRegistration.cs" />
     <Compile Include="Areas\Profile\Controllers\InformationController.cs" />
     <Compile Include="Areas\Profile\Models\ProfileViewModel.cs" />
     <Compile Include="Areas\Profile\ProfileAreaRegistration.cs" />
@@ -206,11 +227,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutoMapper\MapperProfiles.cs" />
     <Compile Include="Models\AutoMapper\MapperViewModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\AuthorizeRoles.cs" />
+    <Compile Include="Util\MultipleButtons.cs" />
     <Compile Include="Util\Ninject.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +267,26 @@
     <Content Include="Areas\Doctor\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Doctor\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Doctor\Views\Page\Create.cshtml" />
+    <Content Include="Areas\Patient\Views\web.config" />
+    <Content Include="Areas\Patient\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Patient\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Patient\Views\Page\Create.cshtml" />
+    <Content Include="Areas\Administration\Views\web.config" />
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administration\Views\Confirmation\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Confirmation\GetDoctorInfo.cshtml" />
+    <Content Include="Areas\Administration\Views\Confirmation\GetPatientInfo.cshtml" />
+    <Content Include="Areas\Administration\Views\Relationship\Index.cshtml" />
+    <Content Include="Areas\Administration\Views\Relationship\GetDoctorInfo.cshtml" />
+    <Content Include="Areas\Administration\Views\Relationship\GetPatientInfo.cshtml" />
+    <Content Include="Areas\Administration\Views\Relationship\DoctorPatientList.cshtml" />
+    <Content Include="Areas\Patient\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Doctor\Views\Page\Index.cshtml" />
+    <Content Include="Areas\Doctor\Views\Page\GetPatientInfo.cshtml" />
+    <Content Include="Areas\Doctor\Views\PatientCard\Show.cshtml" />
+    <Content Include="Areas\Doctor\Views\PatientCard\GetCardPageInfo.cshtml" />
+    <Content Include="Areas\Doctor\Views\PatientCard\CreateNewCardPage.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -297,6 +340,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administration\Views\ControlPanel\" />
+    <Folder Include="Areas\Patient\Views\MedicalCard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

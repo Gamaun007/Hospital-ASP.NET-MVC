@@ -1,0 +1,25 @@
+﻿@using Hospital.Areas.Doctor.Models
+@model DoctorPageInfo
+@{
+    ViewBag.Title = "Page Info";
+}
+
+@Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
+<div id="pinfo" class="selected-patient-info"> </div>
+
+@section Scripts {
+    <script type="text/javascript" async>
+        $(function () {
+            $("select[id='patients']").removeAttr('multiple');
+        });
+
+        $(document).ready(function () {
+              $("#patients").change(function (evt) {
+                    $.post("@Url.Action("ShowPatientInfo",new { @area = "Doctor" })", { patientId: ($("#patients").val()) }, function (data) {
+                        $("#pinfo").empty();
+                        $("#pinfo").append(data);
+                    });
+                });
+        });
+    </script>
+}

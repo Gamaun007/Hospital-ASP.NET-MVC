@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBaseContext\HospitalContext.cs" />
+    <Compile Include="DataBaseContext\Seed\CreateIfNotExists.cs" />
     <Compile Include="DataBaseContext\Seed\DropCreateInitializer.cs" />
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\UserProfile.cs" />
     <Compile Include="Enums\Specialization.cs" />
-    <Compile Include="Interfaces\IProfileRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfRepositories.cs" />
     <Compile Include="Migrations\201903032038587_MigrateDB.cs" />
     <Compile Include="Migrations\201903032038587_MigrateDB.Designer.cs">
@@ -76,6 +77,26 @@
     <Compile Include="Migrations\201903061852279_MigrateDB2.cs" />
     <Compile Include="Migrations\201903061852279_MigrateDB2.Designer.cs">
       <DependentUpon>201903061852279_MigrateDB2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071127411_MigrateDB3.cs" />
+    <Compile Include="Migrations\201903071127411_MigrateDB3.Designer.cs">
+      <DependentUpon>201903071127411_MigrateDB3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071159235_MigrateDB4.cs" />
+    <Compile Include="Migrations\201903071159235_MigrateDB4.Designer.cs">
+      <DependentUpon>201903071159235_MigrateDB4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903071210207_MigrateDB5.cs" />
+    <Compile Include="Migrations\201903071210207_MigrateDB5.Designer.cs">
+      <DependentUpon>201903071210207_MigrateDB5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903081134071_MigrateDB6.cs" />
+    <Compile Include="Migrations\201903081134071_MigrateDB6.Designer.cs">
+      <DependentUpon>201903081134071_MigrateDB6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903121745074_MigrateDB7.cs" />
+    <Compile Include="Migrations\201903121745074_MigrateDB7.Designer.cs">
+      <DependentUpon>201903121745074_MigrateDB7.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +120,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903061852279_MigrateDB2.resx">
       <DependentUpon>201903061852279_MigrateDB2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071127411_MigrateDB3.resx">
+      <DependentUpon>201903071127411_MigrateDB3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071159235_MigrateDB4.resx">
+      <DependentUpon>201903071159235_MigrateDB4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903071210207_MigrateDB5.resx">
+      <DependentUpon>201903071210207_MigrateDB5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903081134071_MigrateDB6.resx">
+      <DependentUpon>201903081134071_MigrateDB6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903121745074_MigrateDB7.resx">
+      <DependentUpon>201903121745074_MigrateDB7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

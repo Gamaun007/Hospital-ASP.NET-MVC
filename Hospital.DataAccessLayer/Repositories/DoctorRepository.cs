@@ -41,17 +41,36 @@ namespace Hospital.DataAccessLayer.Repositories
             DbContext.Dispose();
         }
 
-        public Doctor Get(string userID)
+        public Doctor GetById(int doctorId)
         {
-            //return DbContext.Doctors.Include(p => p.Profile)
-            //    .Where(d => d.Profile.Id == user.Profile.Id).FirstOrDefault();        
-            throw new NotImplementedException();
+            return DbContext.Doctors.Where(d => d.Id == doctorId).FirstOrDefault();
+        }
+
+        public void AddDoctorPatient(int doctorId, Patient patient)
+        {
+            var doc = DbContext.Doctors.Where(d => d.Id == doctorId).FirstOrDefault();
+            doc.Patients.Add(patient);
+        }
+        public List<Doctor> GetNotConfirmed()
+        {
+            return DbContext.Doctors.Where(d => d.IsConfirmed == false).ToList();
+        }
+
+        public List<Doctor> GetConfirmed()
+        {
+            return DbContext.Doctors.Include(d => d.Patients).Where(d => d.IsConfirmed == true).ToList();
         }
 
         public void Create(Doctor doctor)
         {
             DbContext.Doctors.Add(doctor);
             //DbContext.SaveChanges();
+        }
+
+        public Doctor Get(string userId)
+        {
+            return DbContext.Doctors.Include(p => p.Patients ).Include(p => p.Profile).
+               Where(p => p.Profile.ApplicationUser.Id == userId).FirstOrDefault();
         }
     }
 }

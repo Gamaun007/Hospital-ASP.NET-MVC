@@ -1,0 +1,34 @@
+﻿
+@using Hospital.Areas.Administration.Models
+@model PatientViewModel
+
+<div class="patient-info">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+       
+        @Html.HiddenFor(m => m.Id)
+        @Html.LabelFor(m => m.Profile.Name)
+        @Html.DisplayTextFor(m => m.Profile.Name)
+
+        @Html.LabelFor(m => m.Profile.Gender)
+        @Html.DisplayTextFor(m => m.Profile.Gender)
+
+        @Html.LabelFor(m => m.Profile.BirthDate)
+        @Model.Profile.BirthDate.ToShortDateString()
+
+        @Html.LabelFor(m => m.Profile.Email)
+        @Html.DisplayTextFor(m => m.Profile.Email)
+
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.DisplayTextFor(m => m.PhoneNumber)
+
+        @Html.LabelFor(m => m.AdditionalInformation)
+        @Html.DisplayTextFor(m => m.AdditionalInformation)
+
+        <input type="submit" value="Show MedicalCard" formaction="~/Doctor/PatientCard/Show" formmethod="post" name="action:MedCard" class="btn btn-default" />
+    }
+
+
+</div>

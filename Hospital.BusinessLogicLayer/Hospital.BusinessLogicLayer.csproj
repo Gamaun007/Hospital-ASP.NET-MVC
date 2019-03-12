@@ -123,7 +123,10 @@
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="DataTransferObjects\AutoMapper\MapperDTO.cs" />
+    <Compile Include="DataTransferObjects\AutoMapper\MapperProfiles.cs" />
     <Compile Include="DataTransferObjects\DoctorDTO.cs" />
+    <Compile Include="DataTransferObjects\MedicalCardDTO.cs" />
+    <Compile Include="DataTransferObjects\MedicalCardPageDTO.cs" />
     <Compile Include="DataTransferObjects\PatientDTO.cs" />
     <Compile Include="DataTransferObjects\ProfileDTO.cs" />
     <Compile Include="DataTransferObjects\UserDTO.cs" />

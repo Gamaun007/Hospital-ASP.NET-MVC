@@ -41,5 +41,15 @@ namespace Hospital.DataAccessLayer.Repositories
         {
             DbContext.Profiles.Add(profile);
         }
+
+        public void RemoveFromDoctor(Doctor doc)
+        {
+            DbContext.Doctors.Remove(doc);
+        }
+
+        public void RemoveFromPatient(Patient pat)
+        {
+            DbContext.Patients.Remove(pat);
+        }
     }
 }

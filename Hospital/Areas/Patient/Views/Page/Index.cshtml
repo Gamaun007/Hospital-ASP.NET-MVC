@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Page";
+}
+@using Hospital.Areas.Patient.Models
+@model PatientPageInfo
+
+<div class="patient-info">
+
+
+    @Html.LabelFor(m => m.Profile.BirthDate)
+    @Model.Profile.BirthDate.ToShortDateString()
+
+    @Html.LabelFor(m => m.PhoneNumber)
+    @Html.DisplayTextFor(m => m.PhoneNumber)
+
+    @Html.LabelFor(m => m.Profile.PhoneNumber)
+    @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
+
+    @Html.LabelFor(m => m.AdditionalInformation)
+    @Html.DisplayTextFor(m => m.AdditionalInformation)
+
+    @Html.LabelFor(m => m.Doctor)
+    @Html.DisplayTextFor(m => m.Doctor.Profile.Name)
+    @Html.DisplayTextFor(m => m.Doctor.PhoneNumber)
+    @Html.DisplayTextFor(m => m.Doctor.Specialization)
+    @Html.DisplayTextFor(m => m.AdditionalInformation)
+
+</div>
+

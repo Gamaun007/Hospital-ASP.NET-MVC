@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hospital.DataAccessLayer.Entities.ExtraModels;
 
 namespace Hospital.DataAccessLayer.Repositories
 {
@@ -37,10 +38,43 @@ namespace Hospital.DataAccessLayer.Repositories
                 Where(p => p.Profile.ApplicationUser.Id == userID).FirstOrDefault();
         }
 
+        public void Confirm(Patient pat)
+        {
+            pat.IsConfirmed = true;
+        }
+
+        public void AddPatientMedCardNotation ( int patientId, MedicalCardPage page)
+        {
+            var patient = DbContext.Patients.Where(p => p.Id == patientId).FirstOrDefault();
+            var pageRes = DbContext.MedicalCardPages.Add(page);
+            patient.MedicalCard.Pages.Add(page);
+        }
+
+        public Patient GetById(int patientID)
+        {
+            var res = DbContext.Patients.Include(p => p.MedicalCard.Pages).Where(d => d.Id == patientID).FirstOrDefault();
+            return res;
+            
+        }
+
+        public List<Patient> GetNotConfirmed()
+        {
+            return DbContext.Patients.Where(d => d.IsConfirmed == false).ToList();
+        }
+
+        //public void AddPatientDoctor(int patientId, Doctor doctor)
+        //{
+        //    DbContext.
+        //}
+
+        public List<Patient> GetConfirmed()
+        {
+            return DbContext.Patients.Where(d => d.IsConfirmed == true).ToList();
+        }
+
         public void Create(Patient user)
         {
             DbContext.Patients.Add(user);
-            DbContext.SaveChanges();
         }
     }
 }

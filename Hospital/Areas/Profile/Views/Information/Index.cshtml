@@ -6,6 +6,7 @@
 
 <h2>Your profile information</h2>
 @{
+    @ViewBag.DoctorCreatingInfo
     if (Model.IsUserDoctor && !Model.IsDoctorConfirmed)
     {
         <h4>Your Doctor page is on watching by Administration, wait for the confirmation!</h4>
@@ -28,6 +29,12 @@
 
 @Html.LabelFor(model => model.Name)
 @Model.Name
+
+@Html.LabelFor(model => model.BirthDate)
+@Model.BirthDate.ToShortDateString()
+
+@Html.LabelFor(model => model.Gender)
+@Model.Gender
 
 @Html.LabelFor(model => model.Roles)
 @{

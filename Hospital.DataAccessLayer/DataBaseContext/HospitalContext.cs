@@ -13,20 +13,20 @@ namespace Hospital.DataAccessLayer.DataBaseContext
 {
     public class HospitalContext : IdentityDbContext<ApplicationUser>
     {
-       // Enable-Migrations -ProjectName Hospital.DataAccessLayer -StartUpProjectName Hospital -Verbose
+        // Enable-Migrations -ProjectName Hospital.DataAccessLayer -StartUpProjectName Hospital -Verbose
         public HospitalContext(string conectionString) : base(conectionString) { }
-        public HospitalContext() { }
+        public HospitalContext() {}
 
         static HospitalContext()
         {
-           Database.SetInitializer(new DropCreateInitializer());
+          //  Database.SetInitializer(new DropCreateInitializer());
         }
 
         public DbSet<UserProfile> Profiles { set; get; }
         public DbSet<Patient> Patients { set; get; }
         public DbSet<Doctor> Doctors { set; get; }
-        public DbSet<MedicalCard> MedicalCard { set; get; }
-        public DbSet<MedicalCardPage> CardPage { set; get; }
+        public DbSet<MedicalCard> MedicalCards { set; get; }
+        public DbSet<MedicalCardPage> MedicalCardPages { set; get; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,7 +38,9 @@ namespace Hospital.DataAccessLayer.DataBaseContext
                 .HasRequired(p => p.MedicalCard)
                 .WithRequiredPrincipal(m => m.Patient)
                 .WillCascadeOnDelete(false);
-            
+             
+
+
             // User profile CAN have an Patient account that has this profile,cannot save patient without profile
             modelBuilder.Entity<UserProfile>()
                 .HasOptional(up => up.Patient)
@@ -56,6 +58,20 @@ namespace Hospital.DataAccessLayer.DataBaseContext
                 .WithRequiredPrincipal(p => p.ApplicationUser)
                 .WillCascadeOnDelete(true);
 
+            modelBuilder.Entity<MedicalCard>()
+                 .Property(f =>f.CreatingDate)
+                 .HasColumnType("datetime2")
+                 .HasPrecision(0);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .Property(f => f.BirthDate)
+                .HasColumnType("datetime2")
+                .HasPrecision(0);
+
+            modelBuilder.Entity<MedicalCardPage>()
+                 .Property(f => f.NotationTime)
+                 .HasColumnType("datetime2")
+                 .HasPrecision(0);
         }
     }
 }

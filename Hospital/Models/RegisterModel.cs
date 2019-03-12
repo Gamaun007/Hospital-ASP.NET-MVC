@@ -20,6 +20,13 @@ namespace Hospital.Models
         public string PhoneNumber { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        public string Gender { get; set; }
+
+        [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

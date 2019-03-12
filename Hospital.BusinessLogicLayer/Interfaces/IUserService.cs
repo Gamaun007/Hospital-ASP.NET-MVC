@@ -18,7 +18,28 @@ namespace Hospital.BusinessLogicLayer.Interfaces
         ProfileDTO GetUserProfileInfo(string userId);
         string GetUserPhoneNumber(string userId);
         ICollection<string> GetDoctorSpecializations { get; }
+
+
         void AddUserDoctor(string userId,DoctorDTO doctorDTO);
+        void AddUserPatient(string userId, PatientDTO patientDTO);
+
+        ICollection<DoctorDTO> GetDoctorsNotConfirmed();
+        ICollection<DoctorDTO> GetDoctorsConfirmed();
+        DoctorDTO GetDoctor(string userId);
+
+        ICollection<PatientDTO> GetPatientsNotConfirmed();
+        ICollection<PatientDTO> GetPatientsConfirmed();
+        PatientDTO GetPatient(string userId);
+        PatientDTO GetPatient(int patientId);
+        void AddMedCardPage(int patientId, MedicalCardPageDTO page);
+
+
+        void ConfirmDoctor(string Id);
+        void ConfirmPatient(string Id);
+        void RefuseDoctor(string Id);
+        void RefusePatient(string Id);
+
+        void Associate(string doctorId, string patientId);
 
 
     }

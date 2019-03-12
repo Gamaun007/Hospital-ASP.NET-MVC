@@ -1,0 +1,38 @@
+﻿@using Hospital.Areas.Administration.Models
+@model RelationshipModel
+@{
+    Layout = null;
+}
+@{
+    if (Model.Doctors.Count() > 0 && Model.Patients.Count() > 0)
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <section class="relationship-doctors">
+                @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                @*@Html.HiddenFor(m => m.Doctors)*@
+                <input id="sortbtn" type="submit" value="Associate" name="action:Sort" class="btn btn-default" />
+                @Html.DropDownListFor(model => model.SelectedSpecialization, Model.Specializations, "Without Specialization Sort", new { @id = "specializations" })
+                <div id="doc-list">@Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "doctors", size = 10 })</div>
+                @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
+                @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
+                <div class="submit-button">
+                    <input type="submit" value="Associate" name="action:Associate" class="btn btn-default" />
+                </div>
+                <div class="patients-sort">
+                    <input type="submit" value="Name" name="action:OrderNamePatients" class="btn btn-default" />
+                    <input type="submit" value="Birth Date" name="action:OrderBirthPatients" class="btn btn-default" />
+                </div>
+                <div class="doctors-sort">
+                    <input type="submit" value="Name" name="action:OrderNameDoctors" class="btn btn-default" />
+                    <input type="submit" value="Specialization" name="action:OrderSpecializationDoctors" class="btn btn-default" />
+                    <input type="submit" value="Patients count" name="action:OrderPatientsDoctors" class="btn btn-default" />
+                </div>
+            </section>
+        }
+    }
+}
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+

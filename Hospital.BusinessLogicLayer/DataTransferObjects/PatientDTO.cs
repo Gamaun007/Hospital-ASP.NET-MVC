@@ -13,10 +13,11 @@ namespace Hospital.BusinessLogicLayer.DataTransferObjects
         public bool IsDischarged { set; get; }
         public bool IsConfirmed { set; get; }
         public string PhoneNumber { set; get; }
+        public string AdditionalInformation { set; get; }
 
-        public  UserProfile Profile { get; set; }
-        public  MedicalCard MedicalCard { set; get; }
-        public  Doctor Doctor { set; get; }
+        public  ProfileDTO Profile { get; set; }
+        public  MedicalCardDTO MedicalCard { set; get; }
+        public  DoctorDTO Doctor { set; get; }
     }
 
 }

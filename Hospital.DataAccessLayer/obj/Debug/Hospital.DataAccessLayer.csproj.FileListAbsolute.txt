@@ -1,3 +1,13 @@
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB1.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB2.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB3.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB4.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB5.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB6.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csproj.GenerateResource.Cache
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\Hospital.DataAccessLayer.dll.config
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\Hospital.DataAccessLayer.dll
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\Hospital.DataAccessLayer.pdb
@@ -9,11 +19,6 @@ C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csproj.CoreCompileInputs.cache
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.dll
 C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.pdb
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB.resources
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csproj.GenerateResource.Cache
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB1.resources
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.csprojResolveAssemblyReference.cache
-C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB2.resources
+C:\Users\Easy\Documents\GitHub\Hospital-ASP.NET-MVC\Hospital.DataAccessLayer\obj\Debug\Hospital.DataAccessLayer.Migrations.MigrateDB7.resources

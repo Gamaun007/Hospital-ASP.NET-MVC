@@ -1,0 +1,58 @@
+﻿@using Hospital.Areas.Doctor.Models
+@model PatientCardViewModel
+@{
+    ViewBag.Title = "Medical Card";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id, new { @id = "hiddenId" })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <input type="button" value="Add new notation" name="action:MedCard" class="btn btn-default" id="createnotation" />
+}
+<div id="create-notation" class="selected-pages-info"> </div>
+@{
+    if (Model.Pages.Count() > 0)
+    {
+        @Html.ListBoxFor(model => model.SelectedPageId, Model.Pages, new { @id = "pages", size = 10 })
+        <div id="pinfo" class="selected-pages-info"> </div>
+
+    }
+    else
+    {
+        <span>"This medical card has no pages, create new!"</span>
+    }
+}
+
+
+
+
+
+
+@section Scripts {
+    <script type="text/javascript" async>
+        $(function () {
+            $("select[id='pages']").removeAttr('multiple');
+        });
+
+        $(document).ready(function () {
+              $("#pages").change(function (evt) {
+                  $.post("@Url.Action("ShowPageInfo", new { @area = "Doctor" })", { pageId: ($("#pages").val()) }, function (data) {
+                        $("#pinfo").empty();
+                        $("#pinfo").append(data);
+                    });
+            });
+            $("#createnotation").click(function (evt) {
+                $.post("@Url.Action("CreateNotation", "PatientCard",new { @area = "Doctor" })", { Id: ($("#hiddenId").val()) }, function (data) {
+                    $("#create-notation").empty();
+                    $("#create-notation").append(data);
+                    });
+                });
+        });
+    </script>
+}
+
+
+
+
