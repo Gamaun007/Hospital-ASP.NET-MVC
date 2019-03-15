@@ -1,0 +1,58 @@
+﻿@using Hospital.Areas.Doctor.Models
+@model PatientCardViewModel
+@{
+    ViewBag.Title = "Medical Card";
+}
+@Styles.Render("~/Content/PatientMedicalCard.css")
+@Styles.Render("~/Content/SideLinks.css")
+
+@if (Model.Pages.Count() == 0)
+{
+    <h2>"This medical card has no pages, wait for new notation by your doctor!"</h2>
+}
+<section class="medcard-show">
+    <div class="content">
+        <div class="medcard-inf">
+            <div class="field-card">
+                @Html.LabelFor(m => m.PatientName)
+                @Html.DisplayTextFor(m => m.PatientName)
+            </div>
+            <div class="field-card">
+                @Html.LabelFor(m => m.CreatingDate)
+                @Html.DisplayTextFor(m => m.CreatingDate)
+            </div>
+        </div>
+        @{
+        if (Model.Pages.Count() > 0)
+        {
+            <div class="card-page-list">
+                @Html.ListBoxFor(model => model.SelectedPageId, Model.Pages, new { @id = "pages", size = 10 })
+                <div id="pinfo" class="selected-pages-info"> </div>
+            </div>
+    }
+        }
+
+    </div>
+    <div class="links">
+        @Html.ActionLink("Back to Patient Page", "Index", new { area = "Patient", controller = "Page" })
+    </div>
+</section>
+
+
+@section Scripts {
+    <script type="text/javascript" async>
+        $(function () {
+            $("select[id='pages']").removeAttr('multiple');
+        });
+
+        $(document).ready(function () {
+              $("#pages").change(function (evt) {
+                  $.post("@Url.Action("ShowPageInfo", new { @area = "Patient" })", { pageId: ($("#pages").val()) }, function (data) {
+                        $("#pinfo").empty();
+                        $("#pinfo").append(data);
+                    });
+            });
+        });
+    </script>
+}
+

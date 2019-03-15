@@ -200,10 +200,10 @@
     <Compile Include="Areas\Administration\Controllers\ControlPanelController.cs" />
     <Compile Include="Areas\Administration\Controllers\RelationshipController.cs" />
     <Compile Include="Areas\Administration\Models\ConfirmationModel.cs" />
+    <Compile Include="Areas\Administration\Models\ControlPanelViewModel.cs" />
     <Compile Include="Areas\Administration\Models\DoctorsPatientsSorting.cs" />
     <Compile Include="Areas\Administration\Models\DoctorViewModel.cs" />
     <Compile Include="Areas\Administration\Models\OrderFlags.cs" />
-    <Compile Include="Areas\Administration\Models\PanelViewModel.cs" />
     <Compile Include="Areas\Administration\Models\PatientViewModel.cs" />
     <Compile Include="Areas\Administration\Models\RelationshipModel.cs" />
     <Compile Include="Areas\Doctor\Controllers\PageController.cs" />
@@ -223,7 +223,7 @@
     <Compile Include="Areas\Profile\Models\ProfileViewModel.cs" />
     <Compile Include="Areas\Profile\ProfileAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -239,6 +239,23 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CardPageCreate.css" />
+    <Content Include="Content\CardPageInfo.css" />
+    <Content Include="Content\Confirmation.css" />
+    <Content Include="Content\ConfirmationRoleInfo.css" />
+    <Content Include="Content\ControlPanel.css" />
+    <Content Include="Content\CreatingPage.css" />
+    <Content Include="Content\DoctorPage.css" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\Page.css" />
+    <Content Include="Content\PatientInfoDoctorPage.css" />
+    <Content Include="Content\PatientMedicalCard.css" />
+    <Content Include="Content\Profile.css" />
+    <Content Include="Content\Register.css" />
+    <Content Include="Content\Relationship.css" />
+    <Content Include="Content\RoleInfo.css" />
+    <Content Include="Content\ShowUserInfo.js" />
+    <Content Include="Content\SideLinks.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -287,6 +304,9 @@
     <Content Include="Areas\Doctor\Views\PatientCard\Show.cshtml" />
     <Content Include="Areas\Doctor\Views\PatientCard\GetCardPageInfo.cshtml" />
     <Content Include="Areas\Doctor\Views\PatientCard\CreateNewCardPage.cshtml" />
+    <Content Include="Areas\Patient\Views\MedicalCard\Index.cshtml" />
+    <Content Include="Areas\Patient\Views\MedicalCard\GetCardPageInfo.cshtml" />
+    <Content Include="Areas\Administration\Views\ControlPanel\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -323,9 +343,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Main\About.cshtml" />
+    <Content Include="Views\Main\Contact.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
@@ -340,8 +360,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Administration\Views\ControlPanel\" />
-    <Folder Include="Areas\Patient\Views\MedicalCard\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

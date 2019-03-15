@@ -3,59 +3,77 @@
 @{
     ViewBag.Title = "Index";
 }
+@Styles.Render("~/Content/SideLinks.css")
+@Styles.Render("~/Content/Confirmation.css")
 
-<section class="doctors">
-    @{
-        if (Model.Doctors.Count() > 0)
-        {
-            using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <section class="create-refuse-doctors">
-                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                    @*@Html.HiddenFor(m => m.Doctors)*@
-                    @Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "docs", size = 10 })
-                    @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
 
-                    <div class="submit-button">
-                        <input type="submit" value="Confirm" name="action:ConfirmDoctor" class="btn btn-default" />
-                        <input type="submit" value="Refuse" name="action:RefuseDoctor" class="btn btn-default" />
-                    </div>
+    <div class="main-block">
+        <div class="doc-pat-lists">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="lists">
+                <section class="doctors">
+                    @{
+                    if (Model.Doctors.Count() > 0)
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <section class="create-refuse-doctors">
+                                @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                                @*@Html.HiddenFor(m => m.Doctors)*@
+                                @Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "docs", size = 10 })
+                                @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
+                                
+                                    <div class="submit-button">
+                                        <input type="submit" value="Confirm" formaction="~/Administration/Confirmation/ConfirmDoctor" formmethod="post" name="action:ConfirmDoctor" class="btn btn-default" />
+                                        <input type="submit" value="Refuse" formaction="~/Administration/Confirmation/RefuseDoctor" formmethod="post" name="action:RefuseDoctor" class="btn btn-default" />
+                                    </div>
+                                
+                            </section>
+                    }
+                }
+                    }
                 </section>
-            }
-        }
-    }
-</section>
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<section class="patients">
-    @{
-        if (Model.Patients.Count() > 0)
+                <section class="patients">
+                    @{
+                    if (Model.Patients.Count() > 0)
+                    {
+                        using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <section class="create-refuse-patients">
 
-        {
+                                @*@Html.HiddenFor(m => m.Doctors)*@
+                                @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
+                                @*@Html.ValidationMessageFor(x => x.SelectedPatientId, "", new { @class = "text-danger" })*@
 
-            using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <section class="create-refuse-patients">
-
-                    @*@Html.HiddenFor(m => m.Doctors)*@
-                    @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
-                    @*@Html.ValidationMessageFor(x => x.SelectedPatientId, "", new { @class = "text-danger" })*@
-
-                    <div class="submit-button">
-                        <input type="submit" value="Confirm" name="action:ConfirmPatient" class="btn btn-default" />
-                        <input type="submit" value="Refuse" name="action:RefusePatient" class="btn btn-default" />
-                    </div>
+                                <div class="submit-button">
+                                    <input type="submit" value="Confirm" formaction="~/Administration/Confirmation/ConfirmPatient" formmethod="post" name="action:ConfirmPatient" class="btn btn-default" />
+                                    <input type="submit" value="Refuse" formaction="~/Administration/Confirmation/RefusePatient" formmethod="post" name="action:RefusePatient" class="btn btn-default" />
+                                </div>
+                            </section>
+                    }
+                }
+                    }
                 </section>
-            }
-        }
-    }
-</section>
+            </div>
+
+            <div class="personal-info">
+                <div id="dinfo" class="selected-doctor-info"> </div>
+                <div id="pinfo" class="selected-patient-info"> </div>
+            </div>
+        </div>
+        <div class="links">
+            @Html.ActionLink("Back to control panel", "Index", new { area = "Administration", controller = "ControlPanel" })
+        </div>
+    </div>
 
 
 
-<div id="dinfo" class="selected-doctor-info"> </div>
-<div id="pinfo" class="selected-patient-info"> </div>
+
+
+@*<div id="dinfo" class="selected-doctor-info"> </div>
+    <div id="pinfo" class="selected-patient-info"> </div>*@
 @section Scripts {
     <script type="text/javascript">
             $(function () {

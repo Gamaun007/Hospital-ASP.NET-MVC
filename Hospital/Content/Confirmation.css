@@ -1,0 +1,39 @@
+﻿.lists
+{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+}
+.doc-pat-lists {
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+.personal-info {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+.main-block {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+.main-block{
+    margin-top:10px;
+}
+.main-block ul{
+    margin-left:30%;
+}
+.submit-button {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+#docs {
+
+    
+}
+
+
+

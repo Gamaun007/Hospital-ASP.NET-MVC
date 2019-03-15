@@ -85,7 +85,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "ConfirmDoctor")]
+  
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmDoctor(ConfirmationModel model)
         {
@@ -106,7 +106,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "RefuseDoctor")]
+
         [ValidateAntiForgeryToken]
         public ActionResult RefuseDoctor(ConfirmationModel model)
         {
@@ -126,7 +126,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "ConfirmPatient")]
+
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmPatient(ConfirmationModel model)
         {
@@ -146,7 +146,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "RefusePatient")]
+       
         [ValidateAntiForgeryToken]
         public ActionResult RefusePatient(ConfirmationModel model)
         {

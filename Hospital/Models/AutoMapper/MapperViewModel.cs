@@ -15,6 +15,7 @@ namespace Hospital.Models.AutoMapper
     {
         private static MapperConfiguration _registerModelToUserDto;
         private static MapperConfiguration _loginModelToUserDto;
+        private static MapperConfiguration _adminPanelDTOTOControlPanelViewModel;
         private static MapperConfiguration _doctorRegistrationModelToDoctorDTO;
         private static MapperConfiguration _patientRegistrationModelToPatientDTO;
         private static MapperConfiguration _pageDTOToPageViewModel;
@@ -48,6 +49,9 @@ namespace Hospital.Models.AutoMapper
 
             _loginModelToUserDto = new MapperConfiguration(cfg => cfg.CreateMap<LoginModel, UserDTO>());
 
+            _adminPanelDTOTOControlPanelViewModel = new MapperConfiguration(cfg =>
+           cfg.CreateMap<AdminPanelDTO, ControlPanelViewModel>());
+
             _doctorRegistrationModelToDoctorDTO = new MapperConfiguration(cfg => cfg.CreateMap<DoctorRegistrationModel, DoctorDTO>()
            .ForMember(d => d.IsConfirmed, opt => opt.MapFrom(s => false))
            .ForMember( d=> d.Specialization, opt => opt.MapFrom(s=> s.SelectedSpecialization)));
@@ -67,7 +71,8 @@ namespace Hospital.Models.AutoMapper
             {
                 cfg.CreateMap<DoctorDTO, DoctorPageInfo>()
                 .ForMember(d => d.Patients, opt => opt.Ignore())
-                .ForMember(d => d.SelectedPatientId, opt => opt.Ignore());
+                .ForMember(d => d.SelectedPatientId, opt => opt.Ignore())
+                .ForMember(d => d.IsConfirmed, opt => opt.MapFrom(s => s.IsConfirmed));
                 cfg.AddProfile(new ProfileDTOForConfirmationModel());
                 
             });
@@ -117,6 +122,13 @@ namespace Hospital.Models.AutoMapper
         }
 
 
+        public static IMapper AdminPanelDTOTOControlPanelViewModel
+        {
+            get
+            {
+                return _adminPanelDTOTOControlPanelViewModel.CreateMapper();
+            }
+        }
         public static IMapper MedCardPageViewModelToMedicalCardPageDTO
         {
             get

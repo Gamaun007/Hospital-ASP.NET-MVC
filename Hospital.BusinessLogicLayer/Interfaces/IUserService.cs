@@ -1,5 +1,6 @@
 ﻿using Hospital.BusinessLogicLayer.DataTransferObjects;
 using Hospital.BusinessLogicLayer.Enums;
+using Hospital.DataAccessLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Hospital.BusinessLogicLayer.Interfaces
         ProfileDTO GetUserProfileInfo(string userId);
         string GetUserPhoneNumber(string userId);
         ICollection<string> GetDoctorSpecializations { get; }
+        AdminPanelDTO GetAdminPanelInfo();
+        ICollection<PatientDTO> GetPatientsWaitsForTreat();
+        void PatientNewTreatment(int patientId);
 
 
         void AddUserDoctor(string userId,DoctorDTO doctorDTO);
@@ -33,6 +37,7 @@ namespace Hospital.BusinessLogicLayer.Interfaces
         PatientDTO GetPatient(int patientId);
         void AddMedCardPage(int patientId, MedicalCardPageDTO page);
 
+        void DischargePatient(int patientId);
 
         void ConfirmDoctor(string Id);
         void ConfirmPatient(string Id);

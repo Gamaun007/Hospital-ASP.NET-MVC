@@ -1,4 +1,5 @@
-﻿using Hospital.Areas.Patient.Models;
+﻿using Hospital.Areas.Doctor.Models;
+using Hospital.Areas.Patient.Models;
 using Hospital.BusinessLogicLayer.DataTransferObjects;
 using Hospital.BusinessLogicLayer.Enums;
 using Hospital.BusinessLogicLayer.Interfaces;
@@ -35,34 +36,46 @@ namespace Hospital.Areas.Patient.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [AuthorizeRoles(Roles.Patient)]
-        public ActionResult Index()
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(int Id)
         {
-            var userId = User.Identity.GetUserId();
-            PatientDTO patDTO = null;
-            try
+            if (ModelState.IsValid)
             {
-                patDTO = UserService.GetPatient(userId);
+                var PatientId = Id;
+                var patientDTO = UserService.GetPatient(Id);
+
+                var card = patientDTO.MedicalCard;
+                Pages = card.Pages;
+                var ViewModel = MapperViewModel.MedicalCardDTOToPatientCardViewModel.Map<MedicalCardDTO, PatientCardViewModel>(card);
+
+                FillPagesList(ViewModel, Pages);
+
+                return View(ViewModel);
             }
-            catch (Exception ex)
-            {
-                ViewBag.Message = ex.Message;
-                return RedirectToAction("Index", "Home", new { area = AreaReference.UseRoot });
-            }
-            var patViewModel = MapperViewModel.PatientDTOToPatientViewModel.Map<PatientDTO, PatientPageInfo>(patDTO);
-            return View(patViewModel);
+            return View();
+//MAKE RETURN REDIRECT ACTION!!
         }
 
-        private void FillDoctorsList(MedicalCardViewModel model, PatientDTO patient)
+        private static ICollection<MedicalCardPageDTO> Pages;
+
+        private void FillPagesList(PatientCardViewModel model, ICollection<MedicalCardPageDTO> pages)
         {
-            var mcard = patient.MedicalCard;
-            model.MedicalCardPages = mcard.Pages.Select(x => new SelectListItem
+
+            model.Pages = pages.Select(x => new SelectListItem
             {
                 Value = x.Id.ToString(),
                 Text = x.NotationTime.ToLongDateString()
 
             });
+        }
+        [HttpPost]
+        public PartialViewResult ShowPageInfo(int? pageId)
+        {
+            var pageDTO = Pages.Select(x => x).Where(x => x.Id == pageId).FirstOrDefault();
+            var res = MapperViewModel.PageDTOToPageViewModel.Map<MedicalCardPageDTO, MedicalCardPageViewModel>(pageDTO);
+            return PartialView("GetCardPageInfo", res);
         }
     }
 }

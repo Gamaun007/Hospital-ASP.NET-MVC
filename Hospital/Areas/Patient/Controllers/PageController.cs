@@ -61,7 +61,7 @@ namespace Hospital.Areas.Patient.Controllers
                 model.PhoneNumber = number;
                 return View(model);
             }
-            return RedirectToAction("Index", "Information", new { area = "Profile" });
+            return RedirectToAction("Index", "Page", new { area = "Patient" });
         }
 
         [HttpPost]
@@ -88,23 +88,38 @@ namespace Hospital.Areas.Patient.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult NewTreatment(int Id)
+        {
+            UserService.PatientNewTreatment(Id);
+            return Index();
+        }
+
         [HttpGet]
-        [AuthorizeRoles(Roles.Patient)]
+        [AuthorizeRoles(Roles.User)]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
+           
             PatientDTO patDTO = null;
+          //  ProfileDTO profDTO = null;
             try
             {
                 patDTO = UserService.GetPatient(userId);
+            //    profDTO = UserService.GetUserProfileInfo(User.Identity.GetUserId());
             }
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
-                return RedirectToAction("Index", "Home", new { area = AreaReference.UseRoot });
+               return RedirectToAction("Create");
             }
+            //var profileInfo = MapperViewModel.ProfileDTOToProfileViewModel.Map<ProfileDTO, ProfileViewModel>(profDTO);
+            //if (!profileInfo.IsUserPatient)
+            //{
+            //    RedirectToAction("Create");
+            //}
             var patViewModel = MapperViewModel.PatientDTOToPatientViewModel.Map<PatientDTO, PatientPageInfo>(patDTO);
-            return View(patViewModel);     
+            return View("Index",patViewModel);     
         }
 
     }

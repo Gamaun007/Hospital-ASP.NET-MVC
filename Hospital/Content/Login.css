@@ -1,0 +1,35 @@
+﻿body {
+}
+
+.login{
+  width: 25%;
+  margin: 0 auto;
+}
+h2 {
+    text-align:center;
+}
+.input-section{
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+}
+.input {
+    display: flex;
+    justify-content: space-between;
+    
+}
+.field-validation-error {
+    display:block;
+    width:150%;
+}
+
+.btn {
+    margin-top: 7px;
+}
+
+.submit-button {
+    display: flex;
+    justify-content:center;
+
+}
+

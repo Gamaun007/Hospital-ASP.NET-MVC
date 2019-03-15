@@ -3,27 +3,93 @@
 }
 @using Hospital.Areas.Patient.Models
 @model PatientPageInfo
+@Styles.Render("~/Content/Page.css")
+@Styles.Render("~/Content/SideLinks.css")
 
-<div class="patient-info">
 
+<div class="patient-info page">
+    <div class="content">
+        @if (!Model.IsConfirmed)
+        {
+            <h4> This page is not confirmed, please wait for confirmation, we are reviewing your request!</h4>
+        }
+        else
+        {
 
-    @Html.LabelFor(m => m.Profile.BirthDate)
-    @Model.Profile.BirthDate.ToShortDateString()
+            if (Model.IsDischarged && Model.IsConfirmed)
+            {
+                <h4> You are Discharged </h4>
+                using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.Id)
+                    <input type="submit" value="new request for treatment" formaction="~/Patient/Page/NewTreatment" formmethod="post" class="btn btn-default" />
+                }
+            }
 
-    @Html.LabelFor(m => m.PhoneNumber)
-    @Html.DisplayTextFor(m => m.PhoneNumber)
+            <div class="doctor-patient">
+                <div class="patient">
 
-    @Html.LabelFor(m => m.Profile.PhoneNumber)
-    @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
+                    <div class="field">
+                        @Html.LabelFor(m => m.Profile.Name)
+                        @Html.DisplayTextFor(m => m.Profile.Name)
+                    </div>
+                    <div class="field">
+                        @Html.LabelFor(m => m.Profile.BirthDate)
+                        @Model.Profile.BirthDate.ToShortDateString()
+                    </div>
+                    <div class="field">
+                        @Html.LabelFor(m => m.PhoneNumber)
+                        @Html.DisplayTextFor(m => m.PhoneNumber)
+                    </div>
+                    <div class="field">
+                        @Html.LabelFor(m => m.Profile.PhoneNumber)
+                        @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
 
-    @Html.LabelFor(m => m.AdditionalInformation)
-    @Html.DisplayTextFor(m => m.AdditionalInformation)
+                    </div>
+                    <div class="field">
+                        @Html.LabelFor(m => m.AdditionalInformation)
+                        @Html.DisplayTextFor(m => m.AdditionalInformation)
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.Id)
+                        <input type="submit" value="Medical Card" formaction="~/Patient/MedicalCard/Index" formmethod="post" class="btn btn-default" />
+                    }
+                </div>
+                <div class="doctor">
+                    @if (Model.Doctor != null)
+                    {
+                        <div class="field">
+                            @Html.LabelFor(m => m.Doctor)
+                            @Html.DisplayTextFor(m => m.Doctor.Profile.Name)
+                        </div>
+                        <div class="field">
+                            @Html.LabelFor(m => m.Doctor.PhoneNumber)
+                            @Html.DisplayTextFor(m => m.Doctor.PhoneNumber)
+                        </div>
+                        <div class="field">
+                            @Html.LabelFor(m => m.Doctor.Specialization)
+                            @Html.DisplayTextFor(m => m.Doctor.Specialization)
+                        </div>
+                        <div class="field">
+                            @Html.LabelFor(m => m.Doctor.AdditionalInformation)
+                            @Html.DisplayTextFor(m => m.Doctor.AdditionalInformation)
+                        </div>
+                    }
+                    else
+                    {
+                        <h4>You are not assigned a doctor</h4>
+                    }
+                </div>
+            </div>
 
-    @Html.LabelFor(m => m.Doctor)
-    @Html.DisplayTextFor(m => m.Doctor.Profile.Name)
-    @Html.DisplayTextFor(m => m.Doctor.PhoneNumber)
-    @Html.DisplayTextFor(m => m.Doctor.Specialization)
-    @Html.DisplayTextFor(m => m.AdditionalInformation)
+        }
+    </div>
 
+    <div class="links">
+        @Html.ActionLink("Back to profile", "Index", new { area = "Profile", controller = "Information" })
+    </div>
 </div>
 

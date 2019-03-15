@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
+    <Compile Include="DataTransferObjects\AdminPanelDTO.cs" />
     <Compile Include="DataTransferObjects\AutoMapper\MapperDTO.cs" />
     <Compile Include="DataTransferObjects\AutoMapper\MapperProfiles.cs" />
     <Compile Include="DataTransferObjects\DoctorDTO.cs" />

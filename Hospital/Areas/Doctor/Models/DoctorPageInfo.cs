@@ -11,14 +11,15 @@ namespace Hospital.Areas.Doctor.Models
 {
     public class DoctorPageInfo
     {
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { set; get; }
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { set; get; }
 
-            public string Specialization { get; set; }
-            public ProfileViewModel Profile { get; set; }
+        public string Specialization { get; set; }
+        public ProfileViewModel Profile { get; set; }
+        public bool IsConfirmed { set; get; }
 
-            [Required]
-            public string SelectedPatientId { get; set; }
-            public IEnumerable<SelectListItem> Patients { get; set; }
+        [Required]
+        public string SelectedPatientId { get; set; }
+        public IEnumerable<SelectListItem> Patients { get; set; }
     }
 }

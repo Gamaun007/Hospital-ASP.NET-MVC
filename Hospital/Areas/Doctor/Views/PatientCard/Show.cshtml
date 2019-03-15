@@ -4,26 +4,53 @@
     ViewBag.Title = "Medical Card";
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.Id, new { @id = "hiddenId" })
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <input type="button" value="Add new notation" name="action:MedCard" class="btn btn-default" id="createnotation" />
-}
-<div id="create-notation" class="selected-pages-info"> </div>
-@{
-    if (Model.Pages.Count() > 0)
-    {
-        @Html.ListBoxFor(model => model.SelectedPageId, Model.Pages, new { @id = "pages", size = 10 })
-        <div id="pinfo" class="selected-pages-info"> </div>
+@Styles.Render("~/Content/PatientMedicalCard.css")
+@Styles.Render("~/Content/SideLinks.css")
 
-    }
-    else
-    {
-        <span>"This medical card has no pages, create new!"</span>
-    }
+@if (Model.Pages.Count() == 0)
+{
+    <h2>"This medical card has no pages, create new!"</h2>
 }
+<section class="medcard-show">
+    <div class="content">
+        <div class="medcard-inf">
+            <div class="field-card">
+                @Html.LabelFor(m => m.PatientName)
+                @Html.DisplayTextFor(m => m.PatientName)
+            </div>
+            <div class="field-card">
+                @Html.LabelFor(m => m.CreatingDate)
+                @Html.DisplayTextFor(m => m.CreatingDate)
+            </div>
+        </div>
+        @{
+        if (Model.Pages.Count() > 0)
+        { <div class="card-page-list">
+                @Html.ListBoxFor(model => model.SelectedPageId, Model.Pages, new { @id = "pages", size = 10 })
+                <div id="pinfo" class="selected-pages-info"> </div>
+            </div>
+    }
+        }
+
+        @using (Html.BeginForm())
+    {
+        <div class="form-content">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id, new { @id = "hiddenId" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <input type="button" value="Add new notation" class="btn btn-default" id="createnotation" />
+        </div>
+        <div id="create-notation" class="create-notation"> </div>
+
+}
+
+
+    </div>
+    <div class="links">
+        @Html.ActionLink("Back to Doctor Page", "Index", new { area = "Doctor", controller = "Page" })
+    </div>
+</section>
 
 
 
@@ -48,7 +75,19 @@
                     $("#create-notation").empty();
                     $("#create-notation").append(data);
                     });
-                });
+              });
+            @*$("#discharge-btn").click(function (evt) {
+                var answer = confirm("Are you sure, Discharge selected patient??")
+                if (answer) {
+                     $.post("@Url.Action("DischargePatient", "PatientCard",new { @area = "Doctor" })", { Id: ($("#hiddenId").val()) }, function (data) {
+                    $("#create-notation").empty();
+                    $("#create-notation").append(data);
+                    });
+                }
+                else {
+                    //some code
+                }
+                });*@
         });
     </script>
 }

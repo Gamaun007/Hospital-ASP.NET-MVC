@@ -38,11 +38,14 @@ namespace Hospital.DataAccessLayer.Repositories
                 Where(p => p.Profile.ApplicationUser.Id == userID).FirstOrDefault();
         }
 
-        public void Confirm(Patient pat)
+        //public void Confirm(Patient pat)
+        //{
+        //    pat.IsConfirmed = true;
+        //}
+        public List<Patient> Get(Func<Patient, bool> expression)
         {
-            pat.IsConfirmed = true;
+            return DbContext.Patients.Where(expression).ToList();
         }
-
         public void AddPatientMedCardNotation ( int patientId, MedicalCardPage page)
         {
             var patient = DbContext.Patients.Where(p => p.Id == patientId).FirstOrDefault();

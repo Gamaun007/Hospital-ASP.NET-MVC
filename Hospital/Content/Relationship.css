@@ -1,0 +1,105 @@
+﻿.relationship {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.listbox{
+    width:75%;
+}
+
+.doctors-patients {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: inherit;
+}
+
+.dplists {
+    width: inherit;
+}
+
+.doc-list {
+    width: 50%;
+}
+
+    .doc-list .select select {
+        width: inherit;
+    }
+
+.pat-list {
+    width: 50%;
+}
+
+doc-pat-list {
+    width: inherit;
+}
+
+.lists {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.partial-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: inherit;
+}
+
+.doc-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+    /*.select select {
+        width: 500px;
+        height: 150px;
+    }*/
+#dinfo {
+    width: 100%;
+    height: 100%;
+}
+#pinfo {
+    width: 100%;
+    height:100%;
+}
+.validation-summary-errors {
+    margin-left: 35%;
+}
+.submit-button {
+    display: flex;
+    justify-content: center;
+}
+.personal-info {
+    display:flex;
+    justify-content:center;
+    flex-direction:row;
+}
+
+#specializations {
+    margin-left: 135px;
+   
+}
+
+.sort-buttons {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+    .sort-buttons .btn {
+        margin-left: 3px;
+        margin-right: 3px;
+    }

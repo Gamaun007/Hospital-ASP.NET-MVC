@@ -1,0 +1,23 @@
+﻿.users-count {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-bottom:20px;
+    font-size: 20px;
+    border-bottom: 3px solid rgba(193, 229, 231, 1);
+}
+.stats {
+    text-align: center;
+}
+.unit-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start
+}
+.field{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    width: 120%;
+}

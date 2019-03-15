@@ -1,0 +1,27 @@
+﻿body {
+}
+
+.information{
+    display:flex;
+    flex-direction:column;
+}
+.unit-info {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 90%;
+    margin: 0 auto;
+    margin-top:10px;
+}
+h2{
+    display:inline-block;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+.profile-messages {
+    border-bottom: 3px solid rgba(193, 229, 231, 1);
+    
+}

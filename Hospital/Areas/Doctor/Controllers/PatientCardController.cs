@@ -58,9 +58,9 @@ namespace Hospital.Areas.Doctor.Controllers
 
                 FillPagesList(ViewModel, Pages);
 
-                return View(ViewModel);
+                return View("Show",ViewModel);
             }
-            return View();
+            return RedirectToAction("Index", "Page");
         }
 
         private static int PatientId;
@@ -106,7 +106,7 @@ namespace Hospital.Areas.Doctor.Controllers
         {
             var pageDTO = MapperViewModel.MedCardPageViewModelToMedicalCardPageDTO.Map<MedicalCardPageViewModel, MedicalCardPageDTO>(model);
             UserService.AddMedCardPage(PatientId, pageDTO);
-            return RedirectToAction("Show", PatientId);
+            return Show(PatientId);
         }
     }
 }

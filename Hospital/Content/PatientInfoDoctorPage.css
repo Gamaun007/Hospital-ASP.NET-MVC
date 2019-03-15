@@ -1,0 +1,10 @@
+﻿.patient-info {
+    text-align: center;
+    border: 2px solid green;
+    width:70%;
+    padding:5px;
+
+}
+    .patient-info .btn {
+        margin:5px;
+    }

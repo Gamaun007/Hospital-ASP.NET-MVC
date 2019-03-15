@@ -43,7 +43,9 @@ namespace Hospital.DataAccessLayer.Repositories
 
         public Doctor GetById(int doctorId)
         {
+            
             return DbContext.Doctors.Where(d => d.Id == doctorId).FirstOrDefault();
+            
         }
 
         public void AddDoctorPatient(int doctorId, Patient patient)
@@ -51,6 +53,7 @@ namespace Hospital.DataAccessLayer.Repositories
             var doc = DbContext.Doctors.Where(d => d.Id == doctorId).FirstOrDefault();
             doc.Patients.Add(patient);
         }
+
         public List<Doctor> GetNotConfirmed()
         {
             return DbContext.Doctors.Where(d => d.IsConfirmed == false).ToList();
@@ -67,10 +70,21 @@ namespace Hospital.DataAccessLayer.Repositories
             //DbContext.SaveChanges();
         }
 
+
+
         public Doctor Get(string userId)
         {
             return DbContext.Doctors.Include(p => p.Patients ).Include(p => p.Profile).
                Where(p => p.Profile.ApplicationUser.Id == userId).FirstOrDefault();
+        }
+
+        public Doctor DischargePatient(int doctorId, int patientId)
+        {
+            var doc = DbContext.Doctors.Where(d => d.Id == doctorId).FirstOrDefault();
+            var patient = DbContext.Patients.Where(p => p.Id == patientId && p.Doctor.Id == doctorId).FirstOrDefault();
+            patient.IsDischarged = true;
+            patient.Doctor = null;
+            return doc;
         }
     }
 }

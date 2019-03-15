@@ -2,25 +2,32 @@
 @{
     ViewBag.Title = "Login";
 }
+@Styles.Render("~/Content/Login.css")
+<section class="login">
+    <h2>Login</h2>
 
-<h2>Login</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="login-properties">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="input-sections">
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="input">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.EditorFor(model => model.Email)
+                </div>
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <div class="input password">
+                    @Html.LabelFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password)
+                </div>
+            </div>           
+            <div class="submit-button">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-<section class="login-section">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-    @Html.LabelFor(model => model.Email)
-    @Html.EditorFor(model => model.Email)
-    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-
-    @Html.LabelFor(model => model.Password)
-    @Html.EditorFor(model => model.Password)
-    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-    <div class="submit-button">
-        <input type="submit" value="Login" class="btn btn-default" />
-    </div>
+        </div>
+    }
 
 </section>
-}

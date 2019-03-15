@@ -1,0 +1,11 @@
+﻿.links {
+    display: flex;
+    flex-direction: column;
+    border-left: 3px solid rgba(193, 229, 231, 1);
+    text-align: center;
+    padding-left: 10px;
+}
+
+    .links a {
+        padding-bottom: 5px;
+    }

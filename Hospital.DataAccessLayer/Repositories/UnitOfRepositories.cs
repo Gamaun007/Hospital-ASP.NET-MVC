@@ -20,6 +20,7 @@ namespace Hospital.DataAccessLayer.Repositories
         private ProfileRepository _profileRepository;
         private DoctorRepository _doctorRepository;
         private PatientRepository _patientRepository;
+        private AdministrationRepository _administrationRepository { get; }
 
         public UnitOfRepositories(string connectionString)
         {
@@ -29,6 +30,7 @@ namespace Hospital.DataAccessLayer.Repositories
             _profileRepository = new ProfileRepository(_context);
             _doctorRepository = new DoctorRepository(_context);
             _patientRepository = new PatientRepository(_context);
+            _administrationRepository = new AdministrationRepository(_context);
         }
 
         private bool disposed = false;
@@ -51,6 +53,11 @@ namespace Hospital.DataAccessLayer.Repositories
         public PatientRepository PatientRepository
         {
             get { return _patientRepository; }
+        }
+
+        public AdministrationRepository AdministrationRepository
+        {
+            get { return _administrationRepository; }
         }
 
         public ProfileRepository ProfileRepository
@@ -77,7 +84,7 @@ namespace Hospital.DataAccessLayer.Repositories
                     _profileRepository.Dispose();
                     _doctorRepository.Dispose();
                     _patientRepository.Dispose();
-
+                    _administrationRepository.Dispose();
                 }
                 this.disposed = true;
             }

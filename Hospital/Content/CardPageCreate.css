@@ -1,0 +1,18 @@
+﻿.create-card-page{
+    display:flex;
+    justify-content:center;
+    padding:7px;
+   
+}
+    .create-card-page form {
+        border: 2px solid purple;
+    }
+.field {
+        display: flex;
+        flex-direction: column;
+    }
+textarea {
+    width: 300px;
+    height: 100px;
+}
+

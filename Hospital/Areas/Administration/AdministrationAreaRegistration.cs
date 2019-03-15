@@ -17,7 +17,7 @@ namespace Hospital.Areas.Administration
             context.MapRoute(
                 "Administration_default",
                 "Administration/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", controller ="ControlPanel", id = UrlParameter.Optional }
             );
         }
     }

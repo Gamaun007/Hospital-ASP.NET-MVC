@@ -4,8 +4,36 @@
     ViewBag.Title = "Page Info";
 }
 
-@Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
-<div id="pinfo" class="selected-patient-info"> </div>
+@Styles.Render("~/Content/SideLinks.css")
+@Styles.Render("~/Content/DoctorPage.css")
+
+@if(Model.Patients.Count() == 0)
+{
+     <h2> You have no patients </h2>
+}
+<div class="page">
+    <div class="content">
+        @if (!Model.IsConfirmed)
+        {
+            <h4> This page is not confirmed, please wait for confirmation, we are reviewing your request!</h4>
+        }
+        @if (Model.Patients.Count() > 0)
+        {
+            <div class="list-box">
+                @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
+            </div>        
+        }
+
+        <div id="pinfo" class="selected-patient-info"> </div>
+    </div>
+
+
+    <div class="links">
+        @Html.ActionLink("Back to profile", "Index", new { area = "Profile", controller = "Information" })
+    </div>
+</div>
+
+
 
 @section Scripts {
     <script type="text/javascript" async>
@@ -19,7 +47,10 @@
                         $("#pinfo").empty();
                         $("#pinfo").append(data);
                     });
-                });
+            });
         });
+        
+
+
     </script>
 }

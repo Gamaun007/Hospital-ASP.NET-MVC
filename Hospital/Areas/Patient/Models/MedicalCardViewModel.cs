@@ -9,8 +9,15 @@ namespace Hospital.Areas.Patient.Models
 {
     public class MedicalCardViewModel
     {
+        [Display(Name = "Card Number")]
+        public int Id { set; get; }
+        [Display(Name = "Creating Date")]
+        public DateTime CreatingDate { set; get; }
+        [Display(Name = " Patient name")]
+        public string PatientName { set; get; }
+
         [Required]
         public string SelectedPageId { get; set; }
-        public IEnumerable<SelectListItem> MedicalCardPages { get; set; }
+        public IEnumerable<SelectListItem> Pages { get; set; }
     }
 }

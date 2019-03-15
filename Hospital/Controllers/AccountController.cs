@@ -97,7 +97,7 @@ namespace Hospital.Controllers
                 {
                     IsPersistent = true
                 }, claim);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Information", new { area = "Profile" });
             }
             return View(model);
 

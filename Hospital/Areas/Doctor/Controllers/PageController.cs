@@ -110,7 +110,7 @@ namespace Hospital.Areas.Doctor.Controllers
         private static ICollection<PatientDTO> DoctorPatients;
 
         [HttpGet]
-        [AuthorizeRoles(Roles.Doctor)]
+        [AuthorizeRoles(Roles.User)]
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
@@ -122,12 +122,12 @@ namespace Hospital.Areas.Doctor.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = ex.Message;
-                return RedirectToAction("Index", "Home", new { area = AreaReference.UseRoot });
+                return RedirectToAction("Create");
             }
             var docPageModel = MapperViewModel.DoctorDTOToDoctorPageInfo.Map<DoctorDTO, DoctorPageInfo>(docDTO);
             DoctorPatients = docDTO.Patients;
             FillPatientsList(docPageModel, DoctorPatients);
-            return View(docPageModel);
+            return View("Index",docPageModel);
         }
 
         [HttpPost]
@@ -154,6 +154,17 @@ namespace Hospital.Areas.Doctor.Controllers
             var patientDTO = DoctorPatients.Select(x => x).Where(x => x.Id == patientId).FirstOrDefault();
             var res = MapperViewModel.PatientDTOToPatientViewModel.Map<PatientDTO, PatientViewModel>(patientDTO);
             return PartialView("GetPatientInfo", res);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DischargePatient(PatientCardViewModel model)
+        {
+            //var patientDTO = DoctorPatients.Select(x => x).Where(x => x.Id == patientId).FirstOrDefault();
+            UserService.DischargePatient(model.Id);
+            return Index();
         }
 
         // getting patinet id in parameters for showing his medical card

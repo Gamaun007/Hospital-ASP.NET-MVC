@@ -37,41 +37,69 @@ namespace Hospital.Areas.Administration.Controllers
         private static ICollection<string> Specializations;
         private static RelationshipModel RelationModel;
         private bool OnSpecSort { set; get; }
+
         // GET: Administration/Relationship
         [HttpGet]
         [AuthorizeRoles(Roles.Administrator)]
         public ActionResult Index()
         {
-            //    if (OnSpecSort)
-            //{
-            //    return View(RelationModel);
-            //}
-                RelationModel = new RelationshipModel();
-            //DoctorsConfirmed = UserService.GetDoctorsConfirmed();
-            //Specializations = UserService.GetDoctorSpecializations;
-            //PatientsConfirmed = UserService.GetPatientsConfirmed();
-
-            //CreateSelectList(RelationModel, DoctorsConfirmed);
-            //CreateSelectList(RelationModel, Specializations);
-            //CreateSelectList(RelationModel, PatientsConfirmed);
-            FillDoctorsList(RelationModel);
-            FillPatientsList(RelationModel);
-            FillSpecializationList(RelationModel);
-
+            RelationModel = new RelationshipModel();
+            FillModel(RelationModel);
             return View(RelationModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [MultipleButton(Name = "action", Argument = "Associate")]
         public ActionResult Associate(RelationshipModel model)
         {
             if (ModelState.IsValid)
             {
-                UserService.Associate(model.SelectedDoctorId, model.SelectedPatientId);
+                try
+                {
+                    UserService.Associate(model.SelectedDoctorId, model.SelectedPatientId);
+                }
+                catch (Exception e)
+                {
+                    return AssociateSamePersonError(model, e.Message);
+                }
+            }
+            else
+            {
+                return AssociateModelError(model);
             }
             return RedirectToAction("Index");
         }
+
+        private ViewResult AssociateSamePersonError(RelationshipModel model, string message)
+        {
+            ModelState.AddModelError("", message);
+            FillModel(model);
+            return View("Index", model);
+        }
+
+        private ViewResult AssociateModelError(RelationshipModel model)
+        {
+            if (model.SelectedDoctorId == null)
+            {
+                ModelState.AddModelError("", "Select Doctor to associate with");
+
+            }
+            if (model.SelectedPatientId == null)
+            {
+                ModelState.AddModelError("", "Select Patient to associate with");
+            }
+            FillModel(model);
+            return View("Index", model);
+
+        }
+        public void FillModel(RelationshipModel model)
+        {
+            FillDoctorsList(model);
+            FillPatientsList(model);
+            FillSpecializationList(model);
+        }
+
+        //Model Fill methods
 
         private void FillDoctorsList(RelationshipModel model)
         {
@@ -87,7 +115,7 @@ namespace Hospital.Areas.Administration.Controllers
 
         private void FillPatientsList(RelationshipModel model)
         {
-            PatientsConfirmed = UserService.GetPatientsConfirmed().Where( p => p.Doctor == null).ToList();
+            PatientsConfirmed = UserService.GetPatientsWaitsForTreat().Where(p => p.Doctor == null).ToList();
             CreateSelectList(model, PatientsConfirmed);
         }
 
@@ -117,9 +145,9 @@ namespace Hospital.Areas.Administration.Controllers
             });
         }
 
-        //Patients sorting
+        //Patients Ordering
+
         [HttpPost]
-       // [MultipleButton(Name = "action", Argument = "OrderNamePatients")]
         public ViewResult OrderPatientByName()
         {
             DoctorsPatientsSorting.ByName(ref PatientsConfirmed);
@@ -128,7 +156,6 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "OrderBirthPatients")]
         public ViewResult OrderPatientByBirthDate()
         {
             DoctorsPatientsSorting.ByBirthDate(ref PatientsConfirmed);
@@ -139,7 +166,6 @@ namespace Hospital.Areas.Administration.Controllers
         //Doctors Ordering
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "OrderNameDoctors")]
         public ViewResult OrderDoctorByName()
         {
             DoctorsPatientsSorting.ByName(ref DoctorsConfirmed);
@@ -147,7 +173,6 @@ namespace Hospital.Areas.Administration.Controllers
             return View("Index", RelationModel);
         }
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "OrderSpecializationDoctors")]
         public ViewResult OrderSpecializationDoctors()
         {
             DoctorsPatientsSorting.BySpecialization(ref DoctorsConfirmed);
@@ -156,7 +181,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        [MultipleButton(Name = "action", Argument = "OrderPatientsDoctors")]
+
         public ViewResult OrderPatientsDoctors()
         {
             DoctorsPatientsSorting.ByPatientsCount(ref DoctorsConfirmed);
@@ -182,7 +207,7 @@ namespace Hospital.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public ViewResult SortBySpecializ(string specialization)
+        public PartialViewResult SortBySpecializ(string specialization)
         {
             if (specialization != "")
             {
@@ -191,17 +216,18 @@ namespace Hospital.Areas.Administration.Controllers
                 CreateSelectList(RelationModel, DoctorsConfirmed);
                 RelationModel.SelectedSpecialization = specialization;
             }
-           
-            
-           return View("Index",RelationModel);
+
+
+            return PartialView("DoctorPatientList", RelationModel);
         }
 
         [HttpPost]
-        public ViewResult CancelDoctorSorting ()
+        public PartialViewResult CancelDoctorSorting(string specialization)
         {
 
-            //FillDoctorsList(RelationModel);
-            return View("Index", RelationModel);
+            FillDoctorsList(RelationModel);
+            RelationModel.SelectedSpecialization = specialization;
+            return PartialView("DoctorPatientList", RelationModel);
         }
 
     }

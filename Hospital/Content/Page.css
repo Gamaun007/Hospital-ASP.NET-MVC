@@ -1,0 +1,49 @@
+﻿.page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+h4{
+    font-weight:bold;
+    color:crimson;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    width:100%;
+   
+}
+.doctor-patient {
+    display: flex;
+    flex-direction: row;
+}
+.patient {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+}
+.pinfo{
+    width:50%;
+}
+.doctor {
+    display: block;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    padding: 5px;
+    border:2px solid crimson;
+}
+form {
+    display:inline-block;
+}
+.patient .btn {
+    margin:5px;
+}
+.patient{
+    width:100%;
+}
+

@@ -1,0 +1,31 @@
+﻿@using Hospital.Areas.Doctor.Models
+@model MedicalCardPageViewModel
+<div class="card-page">
+    @*@Html.HiddenFor(m => m.Id)*@
+    <div class="field-page">
+        @Html.LabelFor(m => m.Id)
+        @Html.DisplayTextFor(m => m.Id)
+    </div>
+    <div class="field-page">
+        @Html.LabelFor(m => m.NotationTime)
+        @Html.DisplayTextFor(m => m.NotationTime)
+    </div>
+    <div class="field-page">
+        @Html.LabelFor(m => m.Diagnosis)
+        @Html.DisplayTextFor(m => m.Diagnosis)
+
+    </div>
+    <div class="field-page">
+        @Html.LabelFor(m => m.Medicaments)
+        @Html.DisplayTextFor(m => m.Medicaments)
+    </div>
+    <div class="field-page">
+        @Html.LabelFor(m => m.Procedures)
+        @Html.DisplayTextFor(m => m.Procedures)
+    </div>
+    <div class="field-page">
+        @Html.LabelFor(m => m.SurgeryOperation)
+        @Html.DisplayTextFor(m => m.SurgeryOperation)
+    </div>
+
+</div>

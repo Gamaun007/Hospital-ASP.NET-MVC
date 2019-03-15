@@ -17,7 +17,7 @@ namespace Hospital.Areas.Patient
             context.MapRoute(
                 "Patient_default",
                 "Patient/{controller}/{action}/{id}",
-                new { action = "Create", id = UrlParameter.Optional }
+                new {controller = "Page", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

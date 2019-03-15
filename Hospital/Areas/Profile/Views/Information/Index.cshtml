@@ -2,67 +2,106 @@
 @model ProfileViewModel
 @{
     ViewBag.Title = "Profile";
-}
-
-<h2>Your profile information</h2>
-@{
-    @ViewBag.DoctorCreatingInfo
-    if (Model.IsUserDoctor && !Model.IsDoctorConfirmed)
-    {
-        <h4>Your Doctor page is on watching by Administration, wait for the confirmation!</h4>
-    }
-    if (Model.IsUserPatient && !Model.IsPatientConfirmed)
-    {
-        <h4>Your Patient page is on watching by Administration, wait for the confirmation!</h4>
-    }
 
 }
-@Html.LabelFor(model => model.Email)
-@Model.Email
+@Styles.Render("~/Content/Profile.css")
+@Styles.Render("~/Content/SideLinks.css")
 
-@Html.LabelFor(model => model.Address)
-@Model.Address
+<div class="information">
+    <div class="profile-messages">
+        <h2>Your profile information</h2>
+        @{
+            @ViewBag.DoctorCreatingInfo
+            if (Model.IsUserDoctor && !Model.IsDoctorConfirmed)
+            {
+                <h4>Your Doctor page is on watching by Administration, wait for the confirmation!</h4>
+            }
+            if (Model.IsUserPatient && !Model.IsPatientConfirmed)
+            {
+                <h4>Your Patient page is on watching by Administration, wait for the confirmation!</h4>
+            }
+
+        }
+    </div>
+
+    <div class="unit-info">
+        <div class="profile-details">
+            <div class="field">
+                @Html.LabelFor(model => model.Email)
+                @Model.Email
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.Address)
+                @Model.Address
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(model => model.PhoneNumber)
+                @Model.PhoneNumber
+            </div>
 
 
-@Html.LabelFor(model => model.PhoneNumber)
-@Model.PhoneNumber
+            <div class="field">
+                @Html.LabelFor(model => model.Name)
+                @Model.Name
+            </div>
 
-@Html.LabelFor(model => model.Name)
-@Model.Name
 
-@Html.LabelFor(model => model.BirthDate)
-@Model.BirthDate.ToShortDateString()
+            <div class="field">
+                @Html.LabelFor(model => model.BirthDate)
+                @Model.BirthDate.ToShortDateString()
+            </div>
 
-@Html.LabelFor(model => model.Gender)
-@Model.Gender
 
-@Html.LabelFor(model => model.Roles)
-@{
-    var res = string.Join(",", Model.Roles);
-}
-@res;
-@*@foreach (var role in Model.Roles)
-    {
-        @Html.Label(role)
-    }*@
+            <div class="field">
+                @Html.LabelFor(model => model.Gender)
+                @Model.Gender
+            </div>
 
-@if (Model.IsUserDoctor)
-{
-    @Html.ActionLink("Patient Page", "Information", "Page")
-}
-else if (!Model.IsUserDoctor)
-{
-    @Html.ActionLink("Create an Doctor page", "Create", "Page")
-}
 
-@if (Model.IsUserPatient)
-{
-    @Html.ActionLink("Patient Page", "Information", "Page")
-}
-else if (!Model.IsUserPatient)
-{
-    @Html.ActionLink("Create an Patient page", "Create", "Page")
-}
+            <div class="field">
+                @Html.LabelFor(model => model.Roles)
+                @{
+                    var res = string.Join(",", Model.Roles);
+                }
+                @res;
+            </div>
+
+        </div>
+
+        <div class="links">
+            @foreach (var role in Model.Roles)
+            {
+                if (role == "Administrator")
+                {
+                    @Html.ActionLink("Admin control panel", "Index", new { area = "Administration", controller = "ControlPanel" })
+                }
+            }
+
+            @if (Model.IsUserDoctor)
+            {
+                @Html.ActionLink("Doctor Page", "Index", new { area = "Doctor", controller = "Page" })
+            }
+            else if (!Model.IsUserDoctor)
+            {
+                @Html.ActionLink("Create an doctor Page", "Create", new { area = "Doctor", controller = "Page" })
+            }
+
+            @if (Model.IsUserPatient)
+            {
+                @Html.ActionLink("Patient Page", "Index", new { area = "Patient", controller = "Page" })
+            }
+            else if (!Model.IsUserPatient)
+            {
+                @Html.ActionLink("Create an patient Page", "Create", new { area = "Patient", controller = "Page" })
+            }
+        </div>
+    </div>
+
+</div>
+
+
 
 
 

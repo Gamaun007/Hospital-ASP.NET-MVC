@@ -15,6 +15,8 @@ namespace Hospital.Areas.Patient.Models
         public string PhoneNumber { set; get; }
         [Display(Name = "Additional info.")]
         public string AdditionalInformation { set; get; }
+        public bool IsDischarged { set; get; }
+        public bool IsConfirmed { set; get; }
         public DoctorViewModel Doctor { set; get; }
         public ProfileViewModel Profile { get; set; }
     }

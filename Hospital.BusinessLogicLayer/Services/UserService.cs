@@ -24,8 +24,8 @@ namespace Hospital.BusinessLogicLayer.Services
         {
             get
             {
-                return  Enum.GetValues(typeof(Specialization)).Cast<Specialization>().Select(s => s.ToString()).ToList();
-               
+                return Enum.GetValues(typeof(Specialization)).Cast<Specialization>().Select(s => s.ToString()).ToList();
+
             }
         }
 
@@ -51,15 +51,15 @@ namespace Hospital.BusinessLogicLayer.Services
         }
         public string GetUserPhoneNumber(string userId)
         {
-           var number = RepoUnit.UserManager.GetPhoneNumber(userId);
-           return number;
+            var number = RepoUnit.UserManager.GetPhoneNumber(userId);
+            return number;
         }
         public ProfileDTO GetUserProfileInfo(string userId)
         {
             ProfileDTO result = null;
             UserProfile profileFromDB = RepoUnit.ProfileRepository.Get(userId);
             if (profileFromDB != null)
-            {               
+            {
                 //var doc = MapperDTO.DoctorToDoctorDTO.Map<Doctor, DoctorDTO>(profileFromDB.Doctor);
                 //var pat = MapperDTO.PatientToPatientDTO.Map<Patient, PatientDTO>(profileFromDB.Patient);
                 //var user = MapperDTO.ApplicationUserToUserDTO.Map<ApplicationUser, UserDTO>(profileFromDB.ApplicationUser);
@@ -67,7 +67,7 @@ namespace Hospital.BusinessLogicLayer.Services
                 return result = mapRepo.UserProfileToProfileDTO.Map<UserProfile, ProfileDTO>(profileFromDB);
             }
             else
-            throw new ApplicationException("Profile not found");
+                throw new ApplicationException("Profile not found");
         }
 
         public void Create(UserDTO user)
@@ -99,11 +99,19 @@ namespace Hospital.BusinessLogicLayer.Services
                 throw new ApplicationException(String.Format("User with email {0} is already  registered in system!", userFromDb.Email));
         }
 
-        public void AddMedCardPage (int patientId, MedicalCardPageDTO page)
+        public void AddMedCardPage(int patientId, MedicalCardPageDTO page)
         {
             var mapper = new MapperDTO(RepoUnit);
             var res = mapper.MedCardPageDTOToMedCardPage.Map<MedicalCardPageDTO, MedicalCardPage>(page);
             RepoUnit.PatientRepository.AddPatientMedCardNotation(patientId, res);
+            RepoUnit.SaveChanges();
+        }
+
+        public void DischargePatient(int patientId)
+        {
+            var patient = RepoUnit.PatientRepository.GetById(patientId);
+            var doctorId = patient.Doctor.Id;
+            var doc = RepoUnit.DoctorRepository.DischargePatient(doctorId, patientId);
             RepoUnit.SaveChanges();
         }
 
@@ -127,7 +135,7 @@ namespace Hospital.BusinessLogicLayer.Services
 
         public void AddUserDoctor(string userId, DoctorDTO doctorDTO)
         {
-           var profileFromDb = RepoUnit.ProfileRepository.Get(userId);
+            var profileFromDb = RepoUnit.ProfileRepository.Get(userId);
             if (profileFromDb != null && profileFromDb.Doctor == null)
             {
                 var res = MapperDTO.DoctorDTOToDoctor.Map<DoctorDTO, Doctor>(doctorDTO);
@@ -153,9 +161,9 @@ namespace Hospital.BusinessLogicLayer.Services
         }
         public PatientDTO GetPatient(string userId)
         {
-            Patient pat = RepoUnit.PatientRepository.Get(userId);     
+            Patient pat = RepoUnit.PatientRepository.Get(userId);
             if (pat != null)
-            {              
+            {
                 var map = new MapperDTO(RepoUnit);
                 var res = map.PatientToPatientDTO.Map<Patient, PatientDTO>(pat);
                 return res;
@@ -177,6 +185,19 @@ namespace Hospital.BusinessLogicLayer.Services
                 throw new ApplicationException("Doctor not found");
         }
 
+        public ICollection<PatientDTO> GetPatientsWaitsForTreat()
+        {
+            ICollection<PatientDTO> patientsDTOColl = new List<PatientDTO>();
+            var patientslist = RepoUnit.PatientRepository.Get(new Func<Patient, bool>(x => x.IsConfirmed == true && x.IsDischarged == false));
+            MapperDTO mapRepo = new MapperDTO(RepoUnit);
+            foreach (var patient in patientslist)
+            {
+                var transfer = mapRepo.PatientToPatientDTO.Map<Patient, PatientDTO>(patient);
+                patientsDTOColl.Add(transfer);
+            }
+            return patientsDTOColl;
+        }
+
         public ICollection<DoctorDTO> GetDoctorsConfirmed()
         {
             ICollection<DoctorDTO> doctorDTOColl = new List<DoctorDTO>();
@@ -189,15 +210,44 @@ namespace Hospital.BusinessLogicLayer.Services
             }
             return doctorDTOColl;
         }
-        public void Associate (string doctorId, string patientId)
+        public void Associate(string doctorId, string patientId)
         {
             int parsedDoctorID;
             int parsedPatientID;
             int.TryParse(doctorId, out parsedDoctorID);
             int.TryParse(patientId, out parsedPatientID);
             var patient = RepoUnit.PatientRepository.GetById(parsedPatientID);
-            RepoUnit.DoctorRepository.AddDoctorPatient(parsedDoctorID,patient);
+            var doctor = RepoUnit.DoctorRepository.GetById(parsedDoctorID);
+            if (doctor.Profile.ApplicationUser.Id == patient.Profile.ApplicationUser.Id)
+                throw new ApplicationException("The doctor cannot treat himself(selected patient and doctor are the same person)");
+            RepoUnit.DoctorRepository.AddDoctorPatient(parsedDoctorID, patient);
             RepoUnit.SaveChanges();
+
+        }
+
+        public AdminPanelDTO GetAdminPanelInfo()
+        {
+            var PatientsInSystem = RepoUnit.AdministrationRepository.GetCount(new Func<Patient, bool>(x => true));
+            var PatientsConfirmed = RepoUnit.AdministrationRepository.GetCount(new Func<Patient, bool>(x => x.IsConfirmed));
+            var PatientsOnTreatment = RepoUnit.AdministrationRepository.GetCount(new Func<Patient, bool>(x => x.Doctor != null));
+
+            var DoctorsTreat = RepoUnit.AdministrationRepository.GetCount(new Func<Doctor, bool>(x => x.Patients.Count() > 0));
+
+            var DoctorsInSystem = RepoUnit.AdministrationRepository.GetCount(new Func<Doctor, bool>(x => true));
+            var DoctorsConfirmed = RepoUnit.AdministrationRepository.GetCount(new Func<Doctor, bool>(x => x.IsConfirmed));
+
+            var Users = RepoUnit.AdministrationRepository.GetCount(new Func<ApplicationUser, bool>(x => true));
+            var res = new AdminPanelDTO()
+            {
+                DoctorsConfirmed = DoctorsConfirmed,
+                DoctorsInSystem = DoctorsInSystem,
+                DoctorsTreat = DoctorsTreat,
+                PatientsConfirmed = PatientsConfirmed,
+                PatientsInSystem = PatientsInSystem,
+                PatientsOnTreatment = PatientsOnTreatment,
+                Users = Users
+            };
+            return res;
         }
 
         public ICollection<PatientDTO> GetPatientsNotConfirmed()
@@ -225,6 +275,19 @@ namespace Hospital.BusinessLogicLayer.Services
             }
             return patientDTOColl;
         }
+
+        public void PatientNewTreatment(int patientId)
+        {
+          Patient pat = RepoUnit.PatientRepository.GetById(patientId);
+            if (pat != null)
+            {
+                pat.IsDischarged = false;
+                RepoUnit.SaveChanges();
+            }
+            else
+                throw new ApplicationException("Patient not found");
+        }
+
 
         public PatientDTO GetPatient(int patientId)
         {
@@ -327,7 +390,7 @@ namespace Hospital.BusinessLogicLayer.Services
 
             if (!patient.IsConfirmed)
             {
-                RepoUnit.PatientRepository.Confirm(patient);
+                patient.IsConfirmed = true;
                 if (!RepoUnit.RoleManager.RoleExists(Roles.Patient.ToString()))
                 {
                     var role = new ApplicationRole { Name = Roles.Patient.ToString() };

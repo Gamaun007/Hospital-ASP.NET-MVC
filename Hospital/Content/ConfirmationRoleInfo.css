@@ -1,0 +1,12 @@
+﻿.doctor-info {
+    text-align: center;
+    border: 2px solid crimson;
+    height: 100%;
+}
+
+.patient-info {
+
+    text-align: center;
+    border: 2px solid green;
+    height: 100%;
+}

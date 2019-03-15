@@ -12,13 +12,14 @@ namespace Hospital.Areas.Profile
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Profile_default",
                 "Profile/{controller}/{action}/{id}",
-                new {contoller = "Information", action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", controller = "Information", id = UrlParameter.Optional }
             );
+
         }
     }
 }

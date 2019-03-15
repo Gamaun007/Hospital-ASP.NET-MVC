@@ -1,42 +1,53 @@
 ﻿@using Hospital.Areas.Administration.Models
 @model RelationshipModel
 @section Scripts {
-    <script  type="text/javascript" async>
+    <script type="text/javascript" async>
             $(function () {
                 $("select[id='doctors']").removeAttr('multiple');
                 $("select[id='patients']").removeAttr('multiple');
             });
 
-            $(document).ready(function () {
-                $("#doctors").change(function (evt) {
+        $(document).ready(function () {
+            $(document).on('change', '#doctors', function (evt) {
                     $.post("@Url.Action("ShowDoctorInfo",new { @area = "Administration" })", { doctorId: ($("#doctors").val()) }, function (data) {
                         $("#dinfo").empty();
                         $("#dinfo").append(data);
+
                     });
                 });
-                $("#patients").change(function (evt) {
+            $(document).on('change', '#patients',function (evt) {
                     $.post("@Url.Action("ShowPatientInfo",new { @area = "Administration" })", { patientId: ($("#patients").val()) }, function (data) {
                         $("#pinfo").empty();
                         $("#pinfo").append(data);
+                       
                     });
                 });
                 $("#specializations").change(function (evt) {
-                    if ($("#specializations").select().val != "") {
+                    var SpecVal = document.getElementById("specializations").value;
+                    if (SpecVal != "") {
 
                         $.post("@Url.Action("SortBySpecializ","Relationship",new { @area = "Administration" })", { specialization: ($("#specializations").val()) }, function (data) {
-                            //$("#docsection").empty();
-                            //$("#docsection").append(data);
+                            $("#D-P-List").empty();
+                            $("#D-P-List").append(data);
+                            $("select[id='doctors']").removeAttr('multiple');
+                            $("select[id='patients']").removeAttr('multiple');
+
+                          //  $("#D-P-List").html(data);
 
 
-                            $("#docsection").html(data);
-                            
-
-                            });
-                    }
-                    else if ($("#specializations").select().val == "") {
-                        $.post("@Url.Action("CancelDoctorSorting", new { @area = "Administration" })", {
                         });
-                        window.location.reload();
+                    }
+                    else if (SpecVal == "") {
+                        $.post("@Url.Action("CancelDoctorSorting", "Relationship",new { @area = "Administration" })", { specialization: ($("#specializations").val()) }, function (data) {
+                            $("#D-P-List").empty();
+                            $("#D-P-List").append(data);
+                            $("select[id='doctors']").removeAttr('multiple');
+                            $("select[id='patients']").removeAttr('multiple');
+
+                           // $("#D-P-List").html(data);
+
+
+                        });
                     }
                 });
             });
@@ -46,43 +57,36 @@
 @{
     ViewBag.Title = "Relationship page";
 }
+@Styles.Render("~/Content/SideLinks.css")
+@Styles.Render("~/Content/Relationship.css")
+<section class="relationship">
 
-    <section id="docsection" class="doctors">
+    <div id="docsection" class="doctors-patients">
         @{
-        if (Model.Doctors.Count() > 0 && Model.Patients.Count() > 0)
-        {
-            using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <section class="relationship-doctors">
-                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                    @*@Html.HiddenFor(m => m.Doctors)*@
-                    @*<input id="sortbtn" type="submit" value="Associate" name="action:Sort" class="btn btn-default" />*@
+            if (Model.Doctors.Count() > 0 && Model.Patients.Count() > 0)
+            { <div class="doc-pat-list">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.DropDownListFor(model => model.SelectedSpecialization, Model.Specializations, "Without Specialization Sort", new { @id = "specializations" })
-                    <div id="doc-list">@Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "doctors", size = 10 })</div>
-                    @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
-                    @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
-                    <div class="submit-button">
-                        @*<input type="submit" value="Associate" name="action:Associate" class="btn btn-default" />*@
-                        <input type="submit" value="Associate" name="action:Associate" class="btn btn-default" />
+                    <div class="dplists" id="D-P-List">
+                        @Html.Partial("DoctorPatientList", Model)
                     </div>
-                    <div class="patients-sort">
-                        <input type="submit" value="Name" name="action:OrderNamePatients" formaction="OrderPatientByName" formmethod="post" class="btn btn-default" />
-                        <input type="submit" value="Birth Date" name="action:OrderBirthPatients" class="btn btn-default" />
-                    </div>
-                    <div class="doctors-sort">
-                        <input type="submit" value="Name" name="action:OrderNameDoctors" class="btn btn-default" />
-                        <input type="submit" value="Specialization" name="action:OrderSpecializationDoctors" class="btn btn-default" />
-                        <input type="submit" value="Patients count" name="action:OrderPatientsDoctors" class="btn btn-default" />
-                    </div>
-                </section>
+                </div>
+            }
         }
-    }
-        }
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div id="dinfo" class="selected-doctor-info"> </div>
-        <div id="pinfo" class="selected-patient-info"> </div>
-    </section>
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+        <div class="personal-info">
+            <div id="dinfo" class="selected-doctor-info"> </div>
+            <div id="pinfo" class="selected-patient-info"> </div>
+        </div>
+
+    </div>
+
+    <div class="links">
+        @Html.ActionLink("Back to control panel", "Index", new { area = "Administration", controller = "ControlPanel" })
+    </div>
+
+</section>
+
 
 
 

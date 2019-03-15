@@ -15,6 +15,7 @@ namespace Hospital.DataAccessLayer.Interfaces
         DoctorRepository DoctorRepository { get; }
         PatientRepository PatientRepository { get; }
         ProfileRepository ProfileRepository { get; }
+        AdministrationRepository AdministrationRepository { get; }
         void SaveChanges();
 
     }

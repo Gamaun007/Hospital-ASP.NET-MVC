@@ -1,38 +1,46 @@
 ﻿@using Hospital.Areas.Administration.Models
 @model PatientViewModel
+@Styles.Render("~/Content/RoleInfo.css")
+<div class="patient-info">
+    <div class="field">
+        @Html.LabelFor(m => m.Id)
+        @Html.DisplayTextFor(m => m.Id)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Name)
+        @Html.DisplayTextFor(m => m.Profile.Name)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Gender)
+        @Html.DisplayTextFor(m => m.Profile.Gender)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.BirthDate)
+        @Model.Profile.BirthDate.ToShortDateString()
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Email)
+        @Html.DisplayTextFor(m => m.Profile.Email)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.DisplayTextFor(m => m.PhoneNumber)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.PhoneNumber)
+        @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.AdditionalInformation)
+        @Html.DisplayTextFor(m => m.AdditionalInformation)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Roles)
+        @{
+            var res = string.Join(",", Model.Profile.Roles);
+        }
+        @res
+    </div>
 
-<div class="doctor-info">
-    @Html.LabelFor(m => m.Id)
-    @Html.DisplayTextFor(m => m.Id)
 
-    @Html.LabelFor(m => m.Profile.Name)
-    @Html.DisplayTextFor(m => m.Profile.Name)
-
-    @Html.LabelFor(m => m.Profile.Gender)
-    @Html.DisplayTextFor(m => m.Profile.Gender)
-
-    @Html.LabelFor(m => m.Profile.BirthDate)
-    @Model.Profile.BirthDate.ToShortDateString()
-
-    @Html.LabelFor(m => m.Profile.Email)
-    @Html.DisplayTextFor(m => m.Profile.Email)
-
-    @Html.LabelFor(m => m.PhoneNumber)
-    @Html.DisplayTextFor(m => m.PhoneNumber)
-
-    @Html.LabelFor(m => m.Profile.PhoneNumber)
-    @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
-
-    @Html.LabelFor(m => m.AdditionalInformation)
-    @Html.DisplayTextFor(m => m.AdditionalInformation)
-
-
-
-    @*@Html.LabelFor(m => m.Profile.ApplicationUser.Roles)
-        @Html.DisplayTextFor(m => m.Profile.ApplicationUser.Roles)*@
-    @Html.LabelFor(m => m.Profile.Roles)
-    @{
-        var res = string.Join(",", Model.Profile.Roles);
-    }
-    @res
 </div>

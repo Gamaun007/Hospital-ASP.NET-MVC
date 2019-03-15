@@ -1,0 +1,54 @@
+﻿@using Hospital.Areas.Administration.Models
+@model ControlPanelViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@Styles.Render("~/Content/SideLinks.css")
+@Styles.Render("~/Content/ControlPanel.css")
+@Styles.Render("~/Content/Profile.css")
+
+<div class="control-panel">
+    <div class="stats users-count">
+        @Html.LabelFor(m => m.Users)
+        @Html.DisplayTextFor(m => m.Users)
+    </div>
+    <div class="unit-info">
+        <div class="doctors">
+            <div class="stats field">
+                @Html.LabelFor(m => m.DoctorsInSystem)
+                @Html.DisplayTextFor(m => m.DoctorsInSystem)
+            </div>
+            <div class="stats field">
+                @Html.LabelFor(m => m.DoctorsConfirmed)
+                @Html.DisplayTextFor(m => m.DoctorsConfirmed)
+            </div>
+            <div class="stats field">
+                @Html.LabelFor(m => m.DoctorsTreat)
+                @Html.DisplayTextFor(m => m.DoctorsTreat)
+            </div>
+        </div>
+        <div class="patients">
+            <div class="stats field">
+                @Html.LabelFor(m => m.PatientsInSystem)
+                @Html.DisplayTextFor(m => m.PatientsInSystem)
+            </div>
+            <div class="stats field">
+                @Html.LabelFor(m => m.PatientsConfirmed)
+                @Html.DisplayTextFor(m => m.PatientsConfirmed)
+            </div>
+            <div class="stats field">
+                @Html.LabelFor(m => m.PatientsOnTreatment)
+                @Html.DisplayTextFor(m => m.PatientsOnTreatment)
+            </div>
+        </div>
+       
+
+
+        <div class="links">
+            @Html.ActionLink("Back to profile", "Index", new { area = "Profile", controller = "Information" })
+            @Html.ActionLink("Confirmation panel", "Index", new { area = "Administration", controller = "Confirmation" })
+            @Html.ActionLink("Relationship panel", "Index", new { area = "Administration", controller = "Relationship" })
+        </div>
+    </div>
+</div>
+

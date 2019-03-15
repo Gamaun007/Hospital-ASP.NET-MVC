@@ -1,34 +1,67 @@
 ﻿
 @using Hospital.Areas.Administration.Models
 @model PatientViewModel
-
+@Styles.Render("~/Content/PatientInfoDoctorPage.css")
 <div class="patient-info">
-
+    <div class="field">
+        @Html.LabelFor(m => m.Id)
+        @Html.DisplayTextFor(m => m.Id)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Name)
+        @Html.DisplayTextFor(m => m.Profile.Name)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Gender)
+        @Html.DisplayTextFor(m => m.Profile.Gender)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.BirthDate)
+        @Model.Profile.BirthDate.ToShortDateString()
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Email)
+        @Html.DisplayTextFor(m => m.Profile.Email)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.DisplayTextFor(m => m.PhoneNumber)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.PhoneNumber)
+        @Html.DisplayTextFor(m => m.Profile.PhoneNumber)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.AdditionalInformation)
+        @Html.DisplayTextFor(m => m.AdditionalInformation)
+    </div>
+    <div class="field">
+        @Html.LabelFor(m => m.Profile.Roles)
+        @{
+            var res = string.Join(",", Model.Profile.Roles);
+        }
+        @res
+    </div>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-       
-        @Html.HiddenFor(m => m.Id)
-        @Html.LabelFor(m => m.Profile.Name)
-        @Html.DisplayTextFor(m => m.Profile.Name)
-
-        @Html.LabelFor(m => m.Profile.Gender)
-        @Html.DisplayTextFor(m => m.Profile.Gender)
-
-        @Html.LabelFor(m => m.Profile.BirthDate)
-        @Model.Profile.BirthDate.ToShortDateString()
-
-        @Html.LabelFor(m => m.Profile.Email)
-        @Html.DisplayTextFor(m => m.Profile.Email)
-
-        @Html.LabelFor(m => m.PhoneNumber)
-        @Html.DisplayTextFor(m => m.PhoneNumber)
-
-        @Html.LabelFor(m => m.AdditionalInformation)
-        @Html.DisplayTextFor(m => m.AdditionalInformation)
-
+        @Html.HiddenFor(m => m.Id, new { @id = "hiddenId" })
         <input type="submit" value="Show MedicalCard" formaction="~/Doctor/PatientCard/Show" formmethod="post" name="action:MedCard" class="btn btn-default" />
+        <input type="submit" value="Dischardge" formaction="~/Doctor/Page/DischargePatient" formmethod="post" class="btn btn-default" id="dschr" />
     }
+
+</div>
+
+
+
 
 
 </div>
+@*@section Scripts {
+    <script type="text/javascript" async>
+
+        $(document).ready('click', '#dschr', function () {
+            alert("Fcuk");
+        });
+    </script>
+    }*@

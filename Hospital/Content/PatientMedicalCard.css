@@ -1,0 +1,51 @@
+﻿.medcard-show{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    margin-top:10px;
+    justify-content:space-around;
+}
+.content{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+}
+.card-page-list {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    width:inherit;
+}
+.card-page {
+    margin:10px;
+    padding:10px;
+    margin-top:0;
+    border: 2px solid yellow;
+}
+#pages {
+    width: 170px;
+    height: 300px;
+}
+.medcard-inf {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+.content form {
+    display: flex;
+    flex-direction: column;
+    padding:50px;
+}
+.selected-pages-info {
+    display: flex;
+    flex-direction: column;
+    width:650px;
+}
+.create-notation{
+    display:flex;
+    flex-direction:column;
+}
+.form-content{
+    display:flex;
+    justify-content:center;
+}

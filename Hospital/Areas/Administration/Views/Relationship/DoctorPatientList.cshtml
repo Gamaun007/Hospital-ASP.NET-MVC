@@ -1,38 +1,49 @@
 ﻿@using Hospital.Areas.Administration.Models
 @model RelationshipModel
 @{
+    /**/
+
     Layout = null;
 }
+@Styles.Render("~/Content/Relationship.css")
+
 @{
-    if (Model.Doctors.Count() > 0 && Model.Patients.Count() > 0)
+    using (Html.BeginForm())
     {
-        using (Html.BeginForm())
-        {
+        <section class="partial-page">
+            
             @Html.AntiForgeryToken()
-            <section class="relationship-doctors">
-                @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                @*@Html.HiddenFor(m => m.Doctors)*@
-                <input id="sortbtn" type="submit" value="Associate" name="action:Sort" class="btn btn-default" />
-                @Html.DropDownListFor(model => model.SelectedSpecialization, Model.Specializations, "Without Specialization Sort", new { @id = "specializations" })
-                <div id="doc-list">@Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "doctors", size = 10 })</div>
-                @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", size = 10 })
-                @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
-                <div class="submit-button">
-                    <input type="submit" value="Associate" name="action:Associate" class="btn btn-default" />
+            <div class="lists">
+                <div class="doc-list">
+                    <div class="select">
+                        @Html.ListBoxFor(model => model.SelectedDoctorId, Model.Doctors, new { @id = "doctors", @class = "listbox", size = 10 })
+                    </div>
+                    <div class="doctors-sort sort-buttons">
+                        <input type="submit" value="Name" formaction="~/Administration/Relationship/OrderDoctorByName" formmethod="post" class="btn btn-default" />
+                        <input type="submit" value="Specialization" formaction="~/Administration/Relationship/OrderSpecializationDoctors" formmethod="post" class="btn btn-default" />
+                        <input type="submit" value="Patients count" formaction="~/Administration/Relationship/OrderPatientsDoctors" formmethod="post" class="btn btn-default" />
+                    </div>
                 </div>
-                <div class="patients-sort">
-                    <input type="submit" value="Name" name="action:OrderNamePatients" class="btn btn-default" />
-                    <input type="submit" value="Birth Date" name="action:OrderBirthPatients" class="btn btn-default" />
+                <div class="pat-list">
+                    <div class="select">
+                        @Html.ListBoxFor(model => model.SelectedPatientId, Model.Patients, new { @id = "patients", @class = "listbox", size = 10 })
+                    </div>
+                    <div class="patients-sort sort-buttons">
+                        <input type="submit" value="Name" formaction="~/Administration/Relationship/OrderPatientByName" formmethod="post" class="btn btn-default" />
+                        <input type="submit" value="Birth Date" formaction="~/Administration/Relationship/OrderPatientByBirthDate" formmethod="post" class="btn btn-default" />
+                    </div>
                 </div>
-                <div class="doctors-sort">
-                    <input type="submit" value="Name" name="action:OrderNameDoctors" class="btn btn-default" />
-                    <input type="submit" value="Specialization" name="action:OrderSpecializationDoctors" class="btn btn-default" />
-                    <input type="submit" value="Patients count" name="action:OrderPatientsDoctors" class="btn btn-default" />
-                </div>
-            </section>
-        }
+            </div>
+            @*@Html.ValidationMessageFor(x => x.SelectedDoctorId, "", new { @class = "text-danger" })*@
+            <div class="submit-button">
+                <input type="submit" value="Associate" formaction="~/Administration/Relationship/Associate" formmethod="post" class="btn btn-default" />
+            </div>
+
+        </section>
     }
 }
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
 
 

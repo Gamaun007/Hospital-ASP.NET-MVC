@@ -1,24 +1,33 @@
 ﻿@using Hospital.Areas.Doctor.Models
 @model MedicalCardPageViewModel
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    @Html.LabelFor(m => m.Medicaments)
-    @Html.TextAreaFor(m => m.Medicaments)
-
-    @Html.LabelFor(m => m.Procedures)
-    @Html.TextAreaFor(m => m.Procedures)
-
-    if (ViewBag.IsDoctorNurse == false)
+@Styles.Render("~/Content/CardPageCreate.css")
+<div class="create-card-page">
+    @using (Html.BeginForm())
     {
-        @Html.LabelFor(m => m.SurgeryOperation)
-        @Html.TextAreaFor(m => m.SurgeryOperation)
+        @Html.AntiForgeryToken()
 
-        @Html.LabelFor(m => m.Diagnosis)
-        @Html.TextAreaFor(m => m.Diagnosis)
+        <div class="field">
+            @Html.LabelFor(m => m.Medicaments)
+            @Html.TextAreaFor(m => m.Medicaments)
+        </div>
+        <div class="field">
+            @Html.LabelFor(m => m.Procedures)
+            @Html.TextAreaFor(m => m.Procedures)
+        </div>
+
+        if (!ViewBag.IsDoctorNurse)
+        {
+            <div class="field">
+                @Html.LabelFor(m => m.SurgeryOperation)
+                @Html.TextAreaFor(m => m.SurgeryOperation)
+            </div>
+
+            <div class="field">
+                @Html.LabelFor(m => m.Diagnosis)
+                @Html.TextAreaFor(m => m.Diagnosis)
+            </div>
+        }
+        <input type="submit" value="Create" formaction="~/Doctor/PatientCard/SubmitNotation" formmethod="post" class="btn btn-default" id="submit-new-notation" />
     }
+</div>
 
-
-    <input type="submit" value="Create" formaction="~/Doctor/PatientCard/SubmitNotation" formmethod="post" class="btn btn-default" id="submit-new-notation" />
-}

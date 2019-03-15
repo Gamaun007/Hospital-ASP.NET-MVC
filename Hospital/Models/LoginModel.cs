@@ -8,10 +8,10 @@ namespace Hospital.Models
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "Login is required")]
         [DataType(DataType.EmailAddress)]
         public string Email { set; get; }
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.Password)]
         public string Password { set; get; }
     }
